@@ -1,5 +1,8 @@
 import datetime
+
+from faker import Faker
 from django.db import models
+
 
 # Create your models here.
 class Student(models.Model):
@@ -16,3 +19,14 @@ class Student(models.Model):
 
     def age(self):
         return datetime.datetime.year - self.birthdate.year
+
+    @classmethod
+    def generate_instances(cls, count=10):
+        faker = Faker()
+        for _ in range(count):
+            instance = Student(
+                first_name=faker.first_name(),
+                last_name=faker.last_name(),
+                email=faker.email(),
+                birthdate=faker.date_time_between(start_date='-30y', end_date='-18y'))
+            instance.save()
