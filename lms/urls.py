@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from students.views import start, hello, generate_students
+from students.views import start, hello, generate_students, get_students
 
 urlpatterns = [
     path('/', start),
     path('admin/', admin.site.urls),
     path('hello/', hello),
-    path('generate_students/', generate_students)
+    path('generate_students/', generate_students),
+    path('students/', get_students)
 ]

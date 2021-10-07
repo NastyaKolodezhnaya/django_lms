@@ -9,6 +9,7 @@ faker = "*"
 ipython = "*"
 webargs = "*"
 django-extensions = "*"
+fields = "*"
 
 [dev-packages]
 
