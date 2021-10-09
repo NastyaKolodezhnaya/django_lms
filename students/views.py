@@ -16,6 +16,7 @@ def start(request):
     return HttpResponse('SUCCESS')
 
 
+<<<<<<< Updated upstream
 def generate_students(request, count=10):
     fake_student = faker.Faker('RU')
     students = [fake_student.name() for n in range(14)]
@@ -23,6 +24,8 @@ def generate_students(request, count=10):
     return HttpResponse(result)
 
 
+=======
+>>>>>>> Stashed changes
 @use_args({
     "first_name": fields.Str(
         required=False
