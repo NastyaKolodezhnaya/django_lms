@@ -28,8 +28,7 @@ from utils import format_records
 def get_teachers(request, params):
     teachers = Teacher.objects.all()
 
-    for param_name, param_value in params.items():
-        teachers = teachers.filter(**{param_name: param_value})
+    teachers = teachers.filter(**params)
 
     result = format_records(teachers)
     return HttpResponse(result)
