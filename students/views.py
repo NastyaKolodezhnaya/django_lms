@@ -16,7 +16,6 @@ def start(request):
     return HttpResponse('SUCCESS')
 
 
-<<<<<<< Updated upstream
 def hello(request):
     return HttpResponse("HELLO")
 
