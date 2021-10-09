@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.db.models import Q
 from webargs.djangoparser import use_args, use_kwargs
 from webargs import fields
 
@@ -13,24 +14,27 @@ def start(request):
     return HttpResponse('SUCCESS')
 
 
-def hello(request):
-    return HttpResponse("HELLO")
-
-
 @use_args({
     "first_name": fields.Str(
         required=False
     ),
     "last_name": fields.Str(
         required=False
+    ),
+    "text": fields.Str(
+        required=False
     )},
     location="query"
 )
 def get_students(request, params):
     students = Student.objects.all()
+    text_fields = ['first_name', 'last_name', 'email']
 
     for param_key, param_value in params.items():
-        students = students.filter(**{param_key: param_value})
+        if param_key == 'text':
+            students = students.filter(Q(members='me'))
+        else:
+            students = students.filter(**{param_key: param_value})
 
     result = format_records(students)
     return HttpResponse(result)
