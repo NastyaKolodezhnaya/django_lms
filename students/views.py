@@ -16,6 +16,7 @@ def start(request):
     return HttpResponse('SUCCESS')
 
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 def generate_students(request, count=10):
     fake_student = faker.Faker('RU')
@@ -26,6 +27,8 @@ def generate_students(request, count=10):
 
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> hw10
 @use_args({
     "first_name": fields.Str(
         required=False
