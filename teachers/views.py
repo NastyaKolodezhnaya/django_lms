@@ -32,3 +32,4 @@ def get_teachers(request, params):
 
     result = format_records(teachers)
     return HttpResponse(result)
+  
