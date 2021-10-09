@@ -32,3 +32,7 @@ def get_teachers(request, params):
 
     result = format_records(teachers)
     return HttpResponse(result)
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 3b0f89712672e81cc0100b78277ae41a1fa5175c
