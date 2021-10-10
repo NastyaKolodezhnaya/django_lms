@@ -15,6 +15,11 @@ class StudentCreateForm(ModelForm):
             raise ValidationError('Such domain is not accepted. Please, use another email')
 
         return email
-    #
-    # def clean(self):
-    #     pass
+
+    def clean_first_name(self):
+        first_name = self.cleaned_data['first_name']
+        return first_name.lower().strip().capitalize()
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data['last_name']
+        return last_name.lower().strip().capitalize()

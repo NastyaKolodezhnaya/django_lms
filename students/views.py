@@ -37,7 +37,6 @@ def generate_students(request, count=10):
     location="query"
 )
 def get_students(request, params):
-
     form = """
         <form >
           <label>First name:</label><br>
