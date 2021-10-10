@@ -12,3 +12,7 @@ class GroupCreateForm(ModelForm):
     @staticmethod
     def normalize_name(course):
         return course.lower().strip().capitalize()
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        return self.normalize_name(email)
