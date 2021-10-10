@@ -3,6 +3,7 @@ from django.db import models
 import random
 from faker import Faker
 
+
 # Create your models here.
 class Teacher(models.Model):
     SPECIALIZATIONS = ['UI/UX Design', "QA Automation", 'Python Basic', 'Python Advanced', 'SMM', 'Java Essentials',

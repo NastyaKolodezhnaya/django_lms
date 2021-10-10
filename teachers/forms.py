@@ -1,13 +1,13 @@
 from django.forms import ModelForm
 from django.core.validators import ValidationError
 
-from students.models import Student
+from teachers.models import Teacher
 
 
-class StudentCreateForm(ModelForm):
+class TeacherCreateForm(ModelForm):
     class Meta:
-        model = Student
-        fields = ['first_name', 'last_name', 'email', 'phone_number', 'birthdate']
+        model = Teacher
+        fields = ['first_name', 'last_name', 'email', 'specialization']
 
     @staticmethod
     def normalize_name(name):

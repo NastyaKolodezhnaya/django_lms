@@ -1,6 +1,7 @@
 import datetime
 import random
 from random import randrange
+import datetime
 
 from faker import Faker
 from django.db import models
@@ -16,6 +17,9 @@ class Group(models.Model):
     course = models.CharField(max_length=40, null=False)
     student_num = models.IntegerField(null=False)
     start_date = models.DateTimeField(null=True, default=datetime.date.today())
+
+    def __str__(self):
+        return f'{self.course}, start: {self.start_date} (id {self.id})'
 
     @classmethod
     def generate_instances(cls, count=10):
