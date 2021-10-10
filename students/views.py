@@ -34,7 +34,21 @@ def generate_students(request, count=10):
     location="query"
 )
 def get_students(request, params):
+<<<<<<< Updated upstream
     students = Student.objects.all()
+=======
+
+    form = """
+        <form >
+          <label>Text:</label><br>
+          <input type="text" name="text" placeholder="Enter text to search"><br><br>
+
+          <input type="submit" value="Search">
+        </form>
+        """
+
+    students = Student.objects.all().order_by('-id')
+>>>>>>> Stashed changes
     text_fields = ['first_name', 'last_name', 'email']
 
     for param_key, param_value in params.items():

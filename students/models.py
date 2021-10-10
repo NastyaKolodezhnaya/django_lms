@@ -2,13 +2,17 @@ import datetime
 
 from faker import Faker
 from django.db import models
+from django.core.validators import MinLengthValidator
 
 
 # Create your models here.
+from students.validators import no_elon_validator
+
+
 class Student(models.Model):
-    first_name = models.CharField(max_length=80, null=False)
-    last_name = models.CharField(max_length=80, null=False)
-    email = models.EmailField(max_length=120, null=True)
+    first_name = models.CharField(max_length=60, null=False, validators=[MinLengthValidator(2)])
+    last_name = models.CharField(max_length=80, null=False, validators=[MinLengthValidator(2)])
+    email = models.EmailField(max_length=120, null=True, validators=[no_elon_validator])
     birthdate = models.DateField(null=True, default=datetime.date.today())
 
     def __str__(self):

@@ -1,4 +1,4 @@
-def format_records(records):  # formatting list of values into string
+def format_records(records):
     if not records:
-        return 'Empty recordset('
-    return '<br>'.join([str(rec) for rec in records])
+        return '(Empty recordset)'
+    return '<br>'.join(f'<a href="/students/update/{rec.id}/">EDIT</a> {rec}' for rec in records)
