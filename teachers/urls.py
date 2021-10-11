@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.urls import path
 
-from teachers.views import get_teachers, create_teacher
+from teachers.views import get_teachers, create_teacher, update_teacher
 
 app_name = 'teachers'
 
 urlpatterns = [
     path('', get_teachers, name='list'),
-    path('create/', create_teacher, name='new')
+    path('create/', create_teacher, name='new'),
+    path('update/<int:pk>/', update_teacher, name='edit')
 ]

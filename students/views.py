@@ -1,11 +1,13 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 from webargs.djangoparser import use_args, use_kwargs, DjangoParser
 from django.core.exceptions import BadRequest
 from webargs import fields
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 
+import students
 from students.forms import StudentCreateForm
 from students.models import Student
 from utils import format_records
@@ -46,7 +48,7 @@ def get_students(request, params):
         </form>
         """
 
-    students = Student.objects.all().order_by('-id')
+    students_rec = Student.objects.all().order_by('-id')
 
     text_fields = ['first_name', 'last_name', 'email']
 
@@ -57,11 +59,11 @@ def get_students(request, params):
                 for field in text_fields:
                     # or_filter = Q() | Q(**{f'{field}__contains': param_value})
                     or_filter |= Q(**{f'{field}__contains': param_value})
-                students = students.filter(or_filter)
+                students_rec = students_rec.filter(or_filter)
             else:
-                students = students.filter(**params)
+                students_rec = students_rec.filter(**params)
 
-    result = format_records(students)
+    result = format_records(students_rec, 'students')  # {students} - django app name to specify redirection
 
     response = form + result
 
@@ -87,4 +89,25 @@ def create_student(request):
     </form>
     """
 
+    return HttpResponse(form_html)
+
+
+@csrf_exempt
+def update_student(request, pk):
+
+    student = get_object_or_404(Student, id=pk)
+
+    if request.method == "POST":
+        form = StudentCreateForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("students:list"))
+
+    form = StudentCreateForm(instance=student)
+    form_html = f"""
+    <form method="POST">
+      {form.as_p()}
+      <input type="submit" value="Save">
+    </form>
+    """
     return HttpResponse(form_html)
