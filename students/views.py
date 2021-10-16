@@ -95,13 +95,12 @@ def update_student(request, pk):
             return HttpResponseRedirect(reverse("students:list"))
 
     form = StudentCreateForm(instance=student)
-    form_html = f"""
-    <form method="POST">
-      {form.as_p()}
-      <input type="submit" value="Save">
-    </form>
-    """
-    return HttpResponse(form_html)
+
+    return render(
+        request=request,
+        template_name='edit.html',
+        context={'edit_form': form}
+    )
 
 
 def delete_student(request, pk):
