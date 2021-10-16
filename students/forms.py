@@ -7,8 +7,7 @@ from students.models import Student
 class StudentCreateForm(ModelForm):
     class Meta:
         model = Student
-        fields = ['first_name', 'last_name', 'email', 'phone_number',
-                  'birthdate', 'enroll_date', 'graduate_date']
+        fields = ['first_name', 'last_name', 'email']
 
     @staticmethod
     def normalize_name(name):
