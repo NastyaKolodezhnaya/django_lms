@@ -10,9 +10,11 @@ from students.validators import no_elon_validator, prohibited_domains, older_tha
 class Student(models.Model):
     first_name = models.CharField(max_length=60, null=False, validators=[MinLengthValidator(2)])
     last_name = models.CharField(max_length=80, null=False, validators=[MinLengthValidator(2)])
-    email = models.EmailField(max_length=120, null=True, validators=[no_elon_validator, prohibited_domains])
-    phone_number = models.CharField(max_length=14, unique=True)
+    email = models.EmailField(max_length=120, null=True, unique=True, validators=[no_elon_validator, prohibited_domains])
+    phone_number = models.CharField(null=True, max_length=14, unique=True)
     birthdate = models.DateField(null=True, default=datetime.date.today(), validators=[older_than_18])
+    enroll_date = models.DateField(null=True)
+    graduate_date = models.DateField(null=True)  # or validators[4_months_after_enrollment] as an option
 
     def __str__(self):
         return f'{self.full_name()}, {self.email} id({self.id})'

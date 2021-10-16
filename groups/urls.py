@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.urls import path
 
-from groups.views import get_groups, create_group
+from groups.views import get_groups, create_group, update_group
 
 app_name = 'groups'
 
 urlpatterns = [
     path('', get_groups, name='list'),
-    path('create/', create_group, name='new')
+    path('create/', create_group, name='new'),
+    path('update/<int:pk>/', update_group, name='edit')
 ]
