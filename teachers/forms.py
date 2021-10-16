@@ -1,14 +1,13 @@
 from django.forms import ModelForm
 from django.core.validators import ValidationError
 
-from students.models import Student
+from teachers.models import Teacher
 
 
-class StudentCreateForm(ModelForm):
+class TeacherCreateForm(ModelForm):
     class Meta:
-        model = Student
-        fields = ['first_name', 'last_name', 'email', 'phone_number',
-                  'birthdate', 'enroll_date', 'graduate_date']
+        model = Teacher
+        fields = ['first_name', 'last_name', 'email', 'specialization']
 
     @staticmethod
     def normalize_name(name):
@@ -31,12 +30,3 @@ class StudentCreateForm(ModelForm):
         last_name = cleaned_data['last_name']
         if first_name == last_name:
             raise ValidationError('First and last names can\'t be equal')
-
-    def clean_date(self):
-        cleaned_data = super().clean()
-
-        enroll_date = cleaned_data['enroll_date']
-        graduate_date = cleaned_data['graduate_date']
-
-        if enroll_date >= graduate_date:
-            raise ValidationError('Graduate date must be after enroll date')

@@ -1,4 +1,5 @@
 import datetime
+from datetime import date
 import random
 from random import randrange
 
@@ -15,7 +16,13 @@ class Group(models.Model):
     # group_name = models.CharField(max_length=80, null=False)
     course = models.CharField(max_length=40, null=False)
     student_num = models.IntegerField(null=False)
-    start_date = models.DateTimeField(null=True, default=datetime.date.today())
+    start_date = models.DateField(null=True, default=date.today())
+
+    def __str__(self):
+        return f'{self.group_name()}, (id {self.id})'
+
+    def group_name(self):
+        return f"{self.course}('{self.start_date}')"
 
     @classmethod
     def generate_instances(cls, count=10):
@@ -25,5 +32,5 @@ class Group(models.Model):
                 # group_name=instance.course + instance.start_date variable reference before assignment!!
                 course=random.choice(cls.COURSES_AVAILABLE),
                 student_num=randrange(5, 30),
-                start_date=faker.date_between(start_date='-5y'))
+                start_date=faker.date_between(start_date='-5y', end_date=datetime.date.today()))
             instance.save()
