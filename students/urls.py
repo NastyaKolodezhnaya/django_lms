@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.urls import path
 from students.views import get_students, create_student, update_student, delete_student
+from students.views import handle_error_404
+from django.conf.urls import handler404
+
 
 app_name = 'students'
 
@@ -24,3 +27,5 @@ urlpatterns = [
     path('update/<int:pk>/', update_student, name='edit'),
     path('delete/<int:pk>/', delete_student, name='delete')
 ]
+
+handler404 = 'students.views.handle_error_404'
