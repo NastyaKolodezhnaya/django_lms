@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from webargs.djangoparser import use_args, DjangoParser
 from django.core.exceptions import BadRequest
 from webargs import fields
@@ -10,6 +10,9 @@ from django.urls import reverse
 from students.forms import StudentCreateForm
 from students.models import Student
 
+from django.shortcuts import render
+from django.template import RequestContext
+
 
 parser = DjangoParser()
 
@@ -17,6 +20,13 @@ parser = DjangoParser()
 @parser.error_handler
 def handle_error(error, req, schema, *, error_status_code, error_headers):
     raise BadRequest(error.messages)
+
+
+def handle_error_404(request, exception):
+    context = RequestContext(request)
+    response = render('404.html', context)
+    response.status_code = 404
+    return response
 
 
 def index(request):
@@ -40,16 +50,24 @@ def get_students(request, params):
 
     text_fields = ['first_name', 'last_name', 'email']
 
-    for param_key, param_value in params.items():
-        if param_value:
-            if param_key == 'text':
-                or_filter = Q()
-                for field in text_fields:
-                    # or_filter = Q() | Q(**{f'{field}__contains': param_value})
-                    or_filter |= Q(**{f'{field}__contains': param_value})
-                students_rec = students_rec.filter(or_filter)
-            else:
-                students_rec = students_rec.filter(**params)
+    # for param_key, param_value in params.items():
+    #     if param_value:
+    #         if param_key == 'text':
+    #             or_filter = Q()
+    #             for field in text_fields:
+    #                 # or_filter = Q() | Q(**{f'{field}__contains': param_value})
+    #                 or_filter |= Q(**{f'{field}__contains': param_value})
+    #             students_rec = students_rec.filter(or_filter)
+    #         else:
+    #             students_rec = students_rec.filter(**params)
+
+    if request.method == 'GET':
+        search_text = request.GET.get('search_box', None)
+        if search_text:
+            or_filter = Q()
+            for field in text_fields:
+                or_filter |= Q(**{f'{field}__contains': search_text})
+            students_rec = students_rec.filter(or_filter)
 
     return render(
         request=request,
@@ -95,13 +113,12 @@ def update_student(request, pk):
             return HttpResponseRedirect(reverse("students:list"))
 
     form = StudentCreateForm(instance=student)
-    form_html = f"""
-    <form method="POST">
-      {form.as_p()}
-      <input type="submit" value="Save">
-    </form>
-    """
-    return HttpResponse(form_html)
+
+    return render(
+        request=request,
+        template_name='edit.html',
+        context={'edit_form': form}
+    )
 
 
 def delete_student(request, pk):
