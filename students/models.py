@@ -33,6 +33,7 @@ class Person(models.Model):
 
 
 class Student(Person):
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     birthdate = models.DateField(null=True, default=datetime.date.today, validators=[older_than_18])
 
     course = models.ForeignKey("students.Course",
@@ -57,7 +58,7 @@ class Student(Person):
                 last_name=faker.last_name(),
                 email=faker.email(),
                 birthdate=faker.date_time_between(start_date="-30y",
-                                                  end_date="-18y"),
+                                                  end_date="-18y")
             )
             st.save()
 
@@ -75,7 +76,8 @@ class Course(models.Model):
 
 
 class Teacher(Person):
-    course = models.ManyToManyField(to="students.Course")
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    course = models.ManyToManyField(to="students.Course", related_name="teachers")
 
     def __str__(self):
-        return f"{self.email} ({self.id})"
+        return f"{self.first_name} {self.last_name}, ({self.id})"

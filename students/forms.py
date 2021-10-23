@@ -1,13 +1,13 @@
 from django.forms import ModelForm
 from django.core.validators import ValidationError
 
-from students.models import Student
+from students.models import Student, Teacher
 
 
-class StudentCreateForm(ModelForm):
+class PersonBaseForm(ModelForm):
     class Meta:
         model = Student
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'course']
 
     @staticmethod
     def normalize_name(name):
@@ -39,3 +39,14 @@ class StudentCreateForm(ModelForm):
 
         if enroll_date >= graduate_date:
             raise ValidationError('Graduate date must be after enroll date')
+
+
+class StudentCreateForm(PersonBaseForm):
+    class Meta(PersonBaseForm.Meta):
+        fields = ["first_name", "last_name", "email", "phone_number", "birthdate", 'course']
+
+
+class TeacherCreateForm(PersonBaseForm):
+    class Meta:
+        model = Teacher
+        fields = ["first_name", "last_name", "email", "phone_number", "course"]

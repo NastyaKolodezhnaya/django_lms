@@ -7,8 +7,8 @@ from webargs import fields
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 
-from students.forms import StudentCreateForm
-from students.models import Student
+from students.forms import StudentCreateForm, TeacherCreateForm
+from students.models import Student, Teacher
 
 from django.shortcuts import render
 from django.template import RequestContext
@@ -48,18 +48,7 @@ def index(request):
 def get_students(request, params):
     students_rec = Student.objects.all()
 
-    text_fields = ['first_name', 'last_name', 'email']
-
-    # for param_key, param_value in params.items():
-    #     if param_value:
-    #         if param_key == 'text':
-    #             or_filter = Q()
-    #             for field in text_fields:
-    #                 # or_filter = Q() | Q(**{f'{field}__contains': param_value})
-    #                 or_filter |= Q(**{f'{field}__contains': param_value})
-    #             students_rec = students_rec.filter(or_filter)
-    #         else:
-    #             students_rec = students_rec.filter(**params)
+    text_fields = ['first_name', 'last_name', 'email']  # 'course' field contains course_id, not course name(
 
     if request.method == 'GET':
         search_text = request.GET.get('search_box', None)
@@ -87,16 +76,9 @@ def create_student(request):
 
     form = StudentCreateForm()
 
-    # form_html = f"""
-    # <form method="POST">
-    #   {form.as_p()}
-    #   <input type="submit" value="Create">
-    # </form>
-    # """
-
     return render(
         request=request,
-        template_name='create.html',
+        template_name='create-student.html',
         context={'create_form': form}
     )
 
@@ -126,3 +108,48 @@ def delete_student(request, pk):
     student.delete()
 
     return HttpResponseRedirect(reverse("students:list"))
+
+
+
+@use_args({
+    "text": fields.Str(
+        required=False
+    )},
+    location="query"
+)
+def get_teachers(request, params):
+    teachers_rec = Teacher.objects.all()
+
+    text_fields = ['first_name', 'last_name', 'email', 'course']
+
+    if request.method == 'GET':
+        search_text = request.GET.get('search_box', None)
+        if search_text:
+            or_filter = Q()
+            for field in text_fields:
+                or_filter |= Q(**{f'{field}__contains': search_text})
+            teachers_rec = teachers_rec.filter(or_filter)
+
+    return render(
+        request=request,
+        template_name='show_teachers.html',
+        context={'teachers_list': teachers_rec}
+    )
+
+
+@csrf_exempt
+def create_teacher(request):
+
+    if request.method == 'POST':
+        form = TeacherCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('students:teachers'))
+
+    form = TeacherCreateForm()
+
+    return render(
+        request=request,
+        template_name='create_teacher.html',
+        context={'create_teacher': form}
+    )
