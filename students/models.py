@@ -35,6 +35,7 @@ class Person(models.Model):
 class Student(Person):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     birthdate = models.DateField(null=True, default=datetime.date.today, validators=[older_than_18])
+    avatar = models.ImageField(upload_to='media', null=True)
 
     course = models.ForeignKey(
         "students.Course", null=True, related_name="students", on_delete=models.SET_NULL

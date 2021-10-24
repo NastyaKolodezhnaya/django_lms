@@ -43,7 +43,7 @@ class PersonBaseForm(ModelForm):
 
 class StudentCreateForm(PersonBaseForm):
     class Meta(PersonBaseForm.Meta):
-        fields = ["first_name", "last_name", "email", "phone_number", "birthdate", 'course']
+        fields = ["first_name", "last_name", "email", "phone_number", "birthdate", 'course', 'avatar']
 
 
 class TeacherCreateForm(PersonBaseForm):

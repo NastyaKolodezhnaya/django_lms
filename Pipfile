@@ -11,6 +11,7 @@ webargs = "*"
 django-extensions = "*"
 fields = "*"
 django-crispy-forms = "*"
+pillow = "*"
 
 [dev-packages]
 
