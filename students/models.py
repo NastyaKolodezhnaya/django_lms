@@ -36,9 +36,9 @@ class Student(Person):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     birthdate = models.DateField(null=True, default=datetime.date.today, validators=[older_than_18])
 
-    course = models.ForeignKey("students.Course",
-                               null=True,
-                               on_delete=models.SET_NULL)
+    course = models.ForeignKey(
+        "students.Course", null=True, related_name="students", on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return f"{self.full_name()}, {self.age()}, {self.email} ({self.id})"
@@ -70,6 +70,9 @@ class Course(models.Model):
     name = models.CharField(null=False, max_length=100)
     start_date = models.DateField(null=True, default=datetime.date.today())
     count_of_students = models.IntegerField(default=0)
+    room = models.ForeignKey(
+        "students.Room", null=True, related_name="courses", on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return f"{self.name}"
@@ -81,3 +84,16 @@ class Teacher(Person):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}, ({self.id})"
+
+
+class Room(models.Model):
+    location = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+    color = models.ForeignKey("students.Color", null=True, on_delete=models.SET_NULL)
+
+
+class Color(models.Model):
+    name = models.CharField(max_length=100, null=True, blank=True)
