@@ -17,8 +17,6 @@ from django.urls import path
 from students.views import get_students, create_student, update_student, delete_student, create_teacher, get_teachers
 from students.views import handle_error_404
 from django.conf.urls import handler404
-from django.conf.urls.static import static
-from django.conf import settings
 
 
 app_name = 'students'
@@ -30,6 +28,6 @@ urlpatterns = [
     path('delete/<pk>/', delete_student, name='delete'),
     path('teachers', get_teachers, name='teachers'),
     path('create-teacher/', create_teacher, name='create-teacher')
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 handler404 = 'students.views.handle_error_404'

@@ -19,11 +19,11 @@ class Person(models.Model):
         max_length=80, null=False, validators=[MinLengthValidator(2)]
     )
     email = models.EmailField(max_length=120, null=True,
-                              validators=[no_elon_validator, prohibited_domains])
+                              blank=True, validators=[no_elon_validator, prohibited_domains])
 
     phone_number = models.CharField(
         null=True, max_length=14, unique=True,
-        validators=[RegexValidator("\d{10,14}")]
+        blank=True, validators=[RegexValidator("\d{10,14}")]
     )
 
     # phone_number = PhoneNumberField(unique=True, null=True)
@@ -34,11 +34,15 @@ class Person(models.Model):
 
 class Student(Person):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
-    birthdate = models.DateField(null=True, default=datetime.date.today, validators=[older_than_18])
-    avatar = models.ImageField(upload_to='media', null=True)
+    birthdate = models.DateField(null=True, blank=True, default=datetime.date.today, validators=[older_than_18])
+
+    avatar = models.ImageField(upload_to='media', null=True,
+                               blank=True)  # doesn't download a pic from 'edit/create student' page
+    resume = models.FileField(upload_to='static', null=True,
+                              blank=True)  # doesn't download a doc from 'edit/create student' page
 
     course = models.ForeignKey(
-        "students.Course", null=True, related_name="students", on_delete=models.SET_NULL
+        "students.Course", null=True, blank=True, related_name="students", on_delete=models.SET_NULL
     )
 
     def __str__(self):
@@ -98,3 +102,12 @@ class Room(models.Model):
 
 class Color(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
+
+
+class Invitations(models.Model):
+    id = models.UUIDField(primary_key=True, unique=True,
+                          default=uuid.uuid4,
+                          editable=False)
+    old_student_id = models.ForeignKey("students.Student", null=False, blank=False,
+                                       related_name="invitee", on_delete=models.SET_NULL)
+    count = models.IntegerField(default=0)
