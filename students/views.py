@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 
 from students.forms import StudentCreateForm, TeacherCreateForm
-from students.models import Student, Teacher
+from students.models import Student, Teacher, Course
 
 from django.shortcuts import render
 from django.template import RequestContext
@@ -40,15 +40,16 @@ def index(request):
 
 
 @use_args({
-    "text": fields.Str(
+    "course": fields.Str(
         required=False
     )},
     location="query"
 )
 def get_students(request, params):
     students_rec = Student.objects.all()
+    courses_rec = Course.objects.all()
 
-    text_fields = ['first_name', 'last_name', 'email']  # 'course' field contains course_id, not course name(
+    text_fields = ['first_name', 'last_name', 'email', 'course__name']
 
     if request.method == 'GET':
         search_text = request.GET.get('search_box', None)
@@ -58,10 +59,14 @@ def get_students(request, params):
                 or_filter |= Q(**{f'{field}__contains': search_text})
             students_rec = students_rec.filter(or_filter)
 
+    if params:
+        students_rec = students_rec.filter(course__name__contains=params['course'])
+
     return render(
         request=request,
         template_name='show_students.html',
-        context={'students_list': students_rec}
+        context={'students_list': students_rec,
+                 'courses_list': courses_rec}
     )
 
 
@@ -113,15 +118,16 @@ def delete_student(request, pk):
 
 
 @use_args({
-    "text": fields.Str(
+    "course": fields.Str(
         required=False
     )},
     location="query"
 )
 def get_teachers(request, params):
     teachers_rec = Teacher.objects.all()
+    courses_rec = Course.objects.all()
 
-    text_fields = ['first_name', 'last_name', 'email', 'course']
+    text_fields = ['first_name', 'last_name', 'email', 'course__name']
 
     if request.method == 'GET':
         search_text = request.GET.get('search_box', None)
@@ -131,10 +137,14 @@ def get_teachers(request, params):
                 or_filter |= Q(**{f'{field}__contains': search_text})
             teachers_rec = teachers_rec.filter(or_filter)
 
+    if params:
+        teachers_rec = teachers_rec.filter(course__name__contains=params['course'])
+
     return render(
         request=request,
         template_name='show_teachers.html',
-        context={'teachers_list': teachers_rec}
+        context={'teachers_list': teachers_rec,
+                 'courses_list': courses_rec}
     )
 
 

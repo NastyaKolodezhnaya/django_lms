@@ -26,7 +26,7 @@ urlpatterns = [
     path('create/', create_student, name='create'),
     path('update/<pk>/', update_student, name='edit'),
     path('delete/<pk>/', delete_student, name='delete'),
-    path('teachers', get_teachers, name='teachers'),
+    path('teachers/', get_teachers, name='teachers'),
     path('create-teacher/', create_teacher, name='create-teacher')
 ]
 
