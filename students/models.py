@@ -37,13 +37,15 @@ class Student(Person):
     birthdate = models.DateField(null=True, blank=True, default=datetime.date.today, validators=[older_than_18])
 
     avatar = models.ImageField(upload_to='media', null=True,
-                               blank=True)  # doesn't download a pic from 'edit/create student' page
+                               blank=True)
     resume = models.FileField(upload_to='static', null=True,
-                              blank=True)  # doesn't download a doc from 'edit/create student' page
+                              blank=True)
 
     course = models.ForeignKey(
         "students.Course", null=True, blank=True, related_name="students", on_delete=models.SET_NULL
     )
+    # inviter = models.
+    # invitee =
 
     def __str__(self):
         return f"{self.full_name()}, {self.age()}, {self.email} ({self.id})"
@@ -52,7 +54,9 @@ class Student(Person):
         return f"{self.first_name} {self.last_name}"
 
     def age(self):
-        return datetime.datetime.now().year - self.birthdate.year
+        if self.birthdate:
+            return datetime.datetime.now().year - self.birthdate.year
+        return 'Enter a valid birthdate, please!'
 
     @classmethod
     def generate_instances(cls, count):
@@ -99,15 +103,30 @@ class Room(models.Model):
     )
     color = models.ForeignKey("students.Color", null=True, on_delete=models.SET_NULL)
 
+    def __str__(self):
+        return f"{self.location}, {self.color}"
+
 
 class Color(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class Invitations(models.Model):
-    id = models.UUIDField(primary_key=True, unique=True,
-                          default=uuid.uuid4,
-                          editable=False)
-    old_student_id = models.ForeignKey("students.Student", null=False, blank=False,
-                                       related_name="invitee", on_delete=models.SET_NULL)
+    # 1st option
+    # id = models.UUIDField(primary_key=True, unique=True,
+    #                       default=uuid.uuid4,
+    #                       editable=False)
+    # old_student_id = models.ForeignKey("students.Student", null=False, blank=False,
+    #                                    related_name="inviter", on_delete=models.RESTRICT)
+    # new_student_id = models.OneToOneField("students.Student", null=False, blank=False,
+    #                                       related_name='invitee', on_delete=models.RESTRICT)
+    #
+    # & add 'count' field to Student model depending on the count of Invitations records with student's id
+
+    # 2nd option
+    old_student = models.ForeignKey("students.Student", null=False, blank=False, related_name="inviter",
+                                    on_delete=models.RESTRICT)
     count = models.IntegerField(default=0)

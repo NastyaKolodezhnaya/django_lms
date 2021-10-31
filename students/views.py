@@ -69,9 +69,10 @@ def get_students(request, params):
 def create_student(request):
 
     if request.method == 'POST':
-        form = StudentCreateForm(request.POST)
+        form = StudentCreateForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            # here can be added invitation check and creation of an Invitation instance
             return HttpResponseRedirect(reverse('students:list'))
 
     form = StudentCreateForm()
@@ -89,7 +90,7 @@ def update_student(request, pk):
     student = get_object_or_404(Student, id=pk)
 
     if request.method == "POST":
-        form = StudentCreateForm(request.POST, instance=student)
+        form = StudentCreateForm(request.POST, request.FILES, instance=student)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse("students:list"))
