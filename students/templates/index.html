@@ -66,16 +66,19 @@
                 </li>
             </ul>
             <!--      creating a search field to filter students on the page      -->
+            {% block search %}
             <form class="d-flex" type="get" action="." style="margin: 0">
-                <input class="d-flex" id="search_box" type="text" name="search_box"  placeholder="Search" >
-                <button class="btn btn-outline-success" id="search_submit" type="submit" >Search</button>
+                <input class="d-flex" id="search_box" type="text" name="search_box"  placeholder="Search.." >
+                <button class="btn btn-outline-success" id="search_submit" type="submit">Search</button>
             </form>
+            {% endblock %}
         </div>
     </div>
 </nav>
 
 <main class="container">
     <div class="bg-light p-5 rounded">
+        <br>
         <br>
         {% block content %}
         <h1>Welcome to LMS starting page!</h1>

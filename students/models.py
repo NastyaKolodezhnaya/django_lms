@@ -42,10 +42,8 @@ class Student(Person):
                               blank=True)
 
     course = models.ForeignKey(
-        "students.Course", null=True, blank=True, related_name="students", on_delete=models.SET_NULL
+        "students.Course", null=True, blank=True, related_name="student_course", on_delete=models.SET_NULL
     )
-    # inviter = models.
-    # invitee =
 
     def __str__(self):
         return f"{self.full_name()}, {self.age()}, {self.email} ({self.id})"
@@ -80,7 +78,7 @@ class Course(models.Model):
     start_date = models.DateField(null=True, default=datetime.date.today())
     count_of_students = models.IntegerField(default=0)
     room = models.ForeignKey(
-        "students.Room", null=True, related_name="courses", on_delete=models.SET_NULL
+        "students.Room", null=True, blank=True, related_name="courses", on_delete=models.SET_NULL
     )
 
     def __str__(self):
@@ -89,7 +87,7 @@ class Course(models.Model):
 
 class Teacher(Person):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    course = models.ManyToManyField(to="students.Course", related_name="teachers")
+    course = models.ManyToManyField(to="students.Course", related_name="teacher_course")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}, ({self.id})"
