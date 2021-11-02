@@ -1,5 +1,13 @@
 {% extends "index.html" %}
 
+{% block search %}
+  <form class="d-flex" type="get" action="{% url 'students:search' %}" style="margin: 0">
+    <input class="d-flex" id="search" type="text" name="search"  placeholder="Search.." >
+    <button class="btn btn-outline-success" id="search_submit" type="submit">Search</button>
+  </form>
+{% endblock %}
+
+
 {% block content %}
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -35,7 +43,7 @@
         <tr>
           <td>
             {% if student.avatar %}
-              <img src="{{ student.avatar.url }}" width="70" height="80" >
+              <img src="{{ student.avatar.url }}" width="60" height="80" >
             {% endif %}
           </td>
           <td>{{ student.first_name }}</td>
@@ -45,7 +53,8 @@
           <td>{{ student.course }}</td>
           <td>
             {% if student.resume %}
-            <a href="{{ student.resume.url }}" download="{{ student.first_name }}_{{ student.last_name }}_resume">Download</a>
+            <a href="{{ student.resume.url }}"
+               download="{{ student.first_name }}_{{ student.last_name }}_resume">Download</a>
             {% endif %}
           </td>
           <td>
