@@ -64,6 +64,7 @@ class Student(Person):
                 first_name=faker.first_name(),
                 last_name=faker.last_name(),
                 email=faker.email(),
+                phone_number=f'+380{faker.msisdn()[3:]}',
                 birthdate=faker.date_time_between(start_date="-30y",
                                                   end_date="-18y")
             )

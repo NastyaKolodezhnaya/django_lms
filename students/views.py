@@ -60,7 +60,7 @@ def get_students(request, params):
             students_rec = students_rec.filter(or_filter)
 
     if params:
-        students_rec = students_rec.filter(course__name__contains=params['course'])
+        students_rec = students_rec.filter(course__id__contains=params['course'])
 
     return render(
         request=request,
@@ -68,6 +68,28 @@ def get_students(request, params):
         context={'students_list': students_rec,
                  'courses_list': courses_rec}
     )
+
+
+# misses url defining and 'name' specification in 'Search' form element
+# plus! redirect via form 'action' on specific search-view
+# def search_view(request):
+#     search_text = request.GET.get('search')
+#     text_fields = ["first_name", "last_name", "email"]
+#     print(request.GET)
+#
+#     if search_text:
+#         or_filter = Q()
+#         for field in text_fields:
+#             or_filter |= Q(**{f"{field}__icontains": search_text})
+#         students = Student.objects.filter(or_filter)
+#     else:
+#         students = Student.objects.all().order_by("-id")
+#
+#     return render(
+#         request=request,
+#         template_name="students_table.html",
+#         context={"students_list": students},
+#     )
 
 
 @csrf_exempt
@@ -138,7 +160,7 @@ def get_teachers(request, params):
             teachers_rec = teachers_rec.filter(or_filter)
 
     if params:
-        teachers_rec = teachers_rec.filter(course__name__contains=params['course'])
+        teachers_rec = teachers_rec.filter(course__id__contains=params['course'])
 
     return render(
         request=request,
