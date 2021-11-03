@@ -11,8 +11,8 @@ from django.urls import reverse, reverse_lazy
 from django.shortcuts import render
 from django.template import RequestContext
 
-from students.forms import StudentCreateForm, TeacherCreateForm
-from students.models import Student, Teacher, Course
+from students.forms import StudentCreateForm
+from students.models import Student, Course
 
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 
@@ -35,10 +35,10 @@ class IndexPage(TemplateView):
     template_name = 'index.html'
 
 
-# need to refresh the page over & over again to reload info from db ??fix
+# need to refresh the page over & over again to reload info from db ??fix ++ course search through students records
 class GetStudents(TemplateView):
     students = Student.objects.all()
-    template_name = 'show_students.html'
+    template_name = 'show.html'
     extra_context = {'students_list': Student.objects.all(),
                      'courses_list': Course.objects.all()}
 
@@ -83,14 +83,14 @@ def search_students(request):
 
     return render(
         request=request,
-        template_name="show_students.html",
+        template_name="show.html",
         context={"students_list": students_rec},
     )
 # search_teacher view !!
 
 
 class CreateStudent(CreateView):
-    template_name = 'create-student.html'
+    template_name = 'create.html'
     fields = "__all__"
     model = Student
     success_url = reverse_lazy('students:list')
@@ -131,52 +131,3 @@ class DeleteStudent(DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
-
-
-@use_args({
-    "course": fields.Str(
-        required=False
-    )},
-    location="query"
-)
-def get_teachers(request, params):
-    teachers_rec = Teacher.objects.all()
-    courses_rec = Course.objects.all()
-
-    text_fields = ['first_name', 'last_name', 'email', 'course__name']
-
-    if request.method == 'GET':
-        search_text = request.GET.get('search_box', None)
-        if search_text:
-            or_filter = Q()
-            for field in text_fields:
-                or_filter |= Q(**{f'{field}__contains': search_text})
-            teachers_rec = teachers_rec.filter(or_filter)
-
-    if params:
-        teachers_rec = teachers_rec.filter(course__id__contains=params['course'])
-
-    return render(
-        request=request,
-        template_name='show_teachers.html',
-        context={'teachers_list': teachers_rec,
-                 'courses_list': courses_rec}
-    )
-
-
-@csrf_exempt
-def create_teacher(request):
-
-    if request.method == 'POST':
-        form = TeacherCreateForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('students:teachers'))
-
-    form = TeacherCreateForm()
-
-    return render(
-        request=request,
-        template_name='create_teacher.html',
-        context={'create_teacher': form}
-    )

@@ -1,12 +1,10 @@
-import datetime
-import uuid
-
 from faker import Faker
+import datetime
 
+import uuid
 from django.db import models
 from django.core.validators import MinLengthValidator, RegexValidator
 # from phonenumber_field.modelfields import PhoneNumberField
-
 
 from students.validators import no_elon_validator, prohibited_domains, older_than_18
 
@@ -86,14 +84,6 @@ class Course(models.Model):
         return f"{self.name}"
 
 
-class Teacher(Person):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    course = models.ManyToManyField(to="students.Course", related_name="teacher_course")
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}, ({self.id})"
-
-
 class Room(models.Model):
     location = models.CharField(
         max_length=100,
@@ -113,7 +103,7 @@ class Color(models.Model):
         return f"{self.name}"
 
 
-class Invitations(models.Model):
+# class Invitations(models.Model):
     # 1st option
     # id = models.UUIDField(primary_key=True, unique=True,
     #                       default=uuid.uuid4,
@@ -126,6 +116,6 @@ class Invitations(models.Model):
     # & add 'count' field to Student model depending on the count of Invitations records with student's id
 
     # 2nd option
-    old_student = models.ForeignKey("students.Student", null=False, blank=False, related_name="inviter",
-                                    on_delete=models.RESTRICT)
-    count = models.IntegerField(default=0)
+    # old_student = models.ForeignKey("students.Student", null=False, blank=False, related_name="inviter",
+    #                                 on_delete=models.RESTRICT)
+    # count = models.IntegerField(default=0)

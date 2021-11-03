@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from students.views import (GetStudents, CreateStudent, UpdateStudent, DeleteStudent,
-                            create_teacher, get_teachers, search_students)
 from students.views import handle_error_404
 from django.conf.urls import handler404
+
+from students.views import (GetStudents, CreateStudent, UpdateStudent, DeleteStudent, search_students)
 
 
 app_name = 'students'
@@ -27,9 +27,7 @@ urlpatterns = [
     path('create/', CreateStudent.as_view(), name='create'),
     path('search/', search_students, name='search'),
     path('update/<pk>/', UpdateStudent.as_view(), name='edit'),
-    path('delete/<pk>/', DeleteStudent.as_view(), name='delete'),
-    path('teachers/', get_teachers, name='teachers'),
-    path('create-teacher/', create_teacher, name='create-teacher')
+    path('delete/<pk>/', DeleteStudent.as_view(), name='delete')
 ]
 
 handler404 = 'students.views.handle_error_404'

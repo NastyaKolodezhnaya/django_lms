@@ -54,11 +54,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'students:teachers' %}">Teachers table</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'teachers:list' %}">Teachers table</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'students:create-teacher' %}">Create teacher</a>
+                    <a class="nav-link active" href="{% url 'teachers:create' %}">Create teacher</a>
                 </li>
 
                 <li class="nav-item">
@@ -82,7 +82,8 @@
         <br>
         {% block content %}
         <h1>Welcome to LMS starting page!</h1>
-        <p class="lead">This website provides a chance to take a look at LMS fictional students (teachers and groups soon as well).<br>
+        <p class="lead">This website provides a chance to take a look at LMS fictional
+            students and teachers (courses soon as well).<br>
             You can also <em>create</em> a new record, <em>edit</em> or <em>delete</em> an existing one - as you like!</p>
         <a class="btn btn-lg btn-primary" href="{% url 'students:list' %}" role="button">Start!</a>
         {% endblock %}

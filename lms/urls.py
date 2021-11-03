@@ -23,6 +23,6 @@ urlpatterns = [
     path('', IndexPage.as_view(), name='start'),
     path('admin/', admin.site.urls),
     path('students/', include('students.urls')),
-    path('teachers/', include('teachers.urls')),
-    path('groups/', include('groups.urls'))
+    path('teachers/', include('teachers.urls'))
+    # path('courses/', include('courses.urls'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
