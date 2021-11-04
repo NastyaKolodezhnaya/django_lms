@@ -12,9 +12,10 @@ from django.shortcuts import render
 from django.template import RequestContext
 
 from students.forms import StudentCreateForm
-from students.models import Student, Course
+from students.models import Student
+from courses.models import Course
 
-from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 
 parser = DjangoParser()
 
@@ -35,38 +36,25 @@ class IndexPage(TemplateView):
     template_name = 'index.html'
 
 
-# need to refresh the page over & over again to reload info from db ??fix ++ course search through students records
-class GetStudents(TemplateView):
-    students = Student.objects.all()
+# need to refresh the page over & over again to reload modified data in the table :/
+class GetStudents(ListView):
+    model = Student
     template_name = 'show.html'
-    extra_context = {'students_list': Student.objects.all(),
-                     'courses_list': Course.objects.all()}
+    # extra_context = {'students_list': students,
+    #                  'courses_list': Course.objects.all()}
 
-    def course_filter(self):
-        course = self.kwargs['course']  # trigger to the method, or how to filter records!!
-        if course:
-            self.students = self.students.filter(course__id__contains=course)
-        return self.students
+    def get_context_data(self, **kwargs):
+        # method must return a dict like 'extra_context' was
+        course_id = self.kwargs.get('course')
+        students = self.model.objects.all()
+        courses = Course.objects.all()
 
-# @use_args({
-#     "course": fields.Str(
-#         required=False
-#     )},
-#     location="query"
-# )
-# def get_students(request, params):
-#     students_rec = Student.objects.all()
-#     courses_rec = Course.objects.all()
-#
-#     if params:
-#         students_rec = students_rec.filter(course__id__contains=params['course'])
-#
-#     return render(
-#         request=request,
-#         template_name='show_students.html',
-#         context={'students_list': students_rec,
-#                  'courses_list': courses_rec}
-#     )
+        if course_id:
+            students = students.filter(course__id__contains=course_id)
+        return {
+            'students_list': students,
+            'courses_list': courses
+        }
 
 
 def search_students(request):

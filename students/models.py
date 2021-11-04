@@ -4,9 +4,8 @@ import datetime
 import uuid
 from django.db import models
 from django.core.validators import MinLengthValidator, RegexValidator
-# from phonenumber_field.modelfields import PhoneNumberField
-
 from students.validators import no_elon_validator, prohibited_domains, older_than_18
+# from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Person(models.Model):
@@ -40,7 +39,7 @@ class Student(Person):
                               blank=True)
 
     course = models.ForeignKey(
-        "students.Course", null=True, blank=True, related_name="student_course", on_delete=models.SET_NULL
+        "courses.Course", null=True, blank=True, related_name="student_course", on_delete=models.SET_NULL
     )
 
     def __str__(self):
@@ -67,40 +66,6 @@ class Student(Person):
                                                   end_date="-18y")
             )
             st.save()
-
-
-class Course(models.Model):
-    id = models.UUIDField(primary_key=True, unique=True,
-                          default=uuid.uuid4,
-                          editable=False)
-    name = models.CharField(null=False, max_length=100)
-    start_date = models.DateField(null=True, default=datetime.date.today())
-    count_of_students = models.IntegerField(default=0)
-    room = models.ForeignKey(
-        "students.Room", null=True, blank=True, related_name="courses", on_delete=models.SET_NULL
-    )
-
-    def __str__(self):
-        return f"{self.name}"
-
-
-class Room(models.Model):
-    location = models.CharField(
-        max_length=100,
-        null=True,
-        blank=True,
-    )
-    color = models.ForeignKey("students.Color", null=True, on_delete=models.SET_NULL)
-
-    def __str__(self):
-        return f"{self.location}, {self.color}"
-
-
-class Color(models.Model):
-    name = models.CharField(max_length=100, null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.name}"
 
 
 # class Invitations(models.Model):

@@ -8,58 +8,47 @@ from webargs import fields
 
 import teachers
 from teachers.models import Teacher
-from students.models import Course
+from courses.models import Course
 
 from django.shortcuts import render
 from django.template import RequestContext
 from teachers.forms import TeacherCreateForm
 
+from django.views.generic import TemplateView, CreateView, ListView
+
 
 # Create your views here.
-@use_args({
-    "course": fields.Str(
-        required=False
-    )},
-    location="query"
-)
-def get_teachers(request, params):
-    teachers_rec = Teacher.objects.all()
-    courses_rec = Course.objects.all()
+class GetTeachers(ListView):
+    model = Teacher
+    template_name = 'show_teachers.html'
 
-    text_fields = ['first_name', 'last_name', 'email', 'course__name']
+    def get_context_data(self, **kwargs):
+        # method must return a dict like 'extra_context' was
+        course_id = self.kwargs.get('course')
+        teachers = self.model.objects.all()
+        courses = Course.objects.all()
 
-    if request.method == 'GET':
-        search_text = request.GET.get('search_box', None)
-        if search_text:
-            or_filter = Q()
-            for field in text_fields:
-                or_filter |= Q(**{f'{field}__contains': search_text})
-            teachers_rec = teachers_rec.filter(or_filter)
-
-    if params:
-        teachers_rec = teachers_rec.filter(course__id__contains=params['course'])
-
-    return render(
-        request=request,
-        template_name='show_teachers.html',
-        context={'teachers_list': teachers_rec,
-                 'courses_list': courses_rec}
-    )
+        if course_id:
+            teachers = teachers.filter(course__id__contains=course_id)
+        return {
+            'teachers_list': teachers,
+            'courses_list': courses
+        }
 
 
-@csrf_exempt
-def create_teacher(request):
+class CreateTeacher(CreateView):
+    template_name = 'create_teacher.html'
+    fields = "__all__"
+    model = Teacher
+    success_url = reverse_lazy('teachers:list')
 
-    if request.method == 'POST':
-        form = TeacherCreateForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('teachers:list'))
-
-    form = TeacherCreateForm()
-
-    return render(
-        request=request,
-        template_name='create_teacher.html',
-        context={'create_teacher': form}
-    )
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        # TODO: add validation to the model 'validator' list!!
+        first_name = form.cleaned_data["first_name"]
+        last_name = form.cleaned_data["last_name"]
+        if first_name == last_name:
+            form._errors["first_name"] = ErrorList(["First and last name cannot be equal, bro!"])
+            form._errors["last_name"] = ErrorList(["First and last name cannot be equal, bro!"])
+            return super().form_invalid(form)
+        return super().form_valid(form)
