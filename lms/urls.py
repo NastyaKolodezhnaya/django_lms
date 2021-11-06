@@ -19,10 +19,19 @@ from students.views import IndexPage
 from django.conf.urls.static import static
 from django.conf import settings
 
+from students.views import LoginStudent, LogoutStudent, StudentSignIn, RegistrationStudent
+
+
+
 urlpatterns = [
     path('', IndexPage.as_view(), name='start'),
     path('admin/', admin.site.urls),
+
+    path('sign_in/', StudentSignIn.as_view(), name='sign_in'),
+    path('registration/', RegistrationStudent.as_view(), name='registration'),
+    path('login/', LoginStudent.as_view(), name='login'),
+    path('logout/', LogoutStudent.as_view(), name='logout'),
+
     path('students/', include('students.urls')),
     path('teachers/', include('teachers.urls'))
-    # path('courses/', include('courses.urls'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

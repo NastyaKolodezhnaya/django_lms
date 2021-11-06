@@ -15,10 +15,12 @@ from django.template import RequestContext
 from teachers.forms import TeacherCreateForm
 
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
-class GetTeachers(ListView):
+class GetTeachers(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('sign_in')
     model = Teacher
     template_name = 'show_teachers.html'
 
@@ -55,7 +57,8 @@ def search_teachers(request):
     )
 
 
-class CreateTeacher(CreateView):
+class CreateTeacher(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('sign_in')
     template_name = 'create_teacher.html'
     fields = "__all__"
     model = Teacher
@@ -73,7 +76,8 @@ class CreateTeacher(CreateView):
         return super().form_valid(form)
 
 
-class UpdateTeacher(UpdateView):
+class UpdateTeacher(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('sign_in')
     template_name = 'edit_teacher.html'
     fields = "__all__"
     model = Teacher
@@ -91,7 +95,8 @@ class UpdateTeacher(UpdateView):
         return super().form_valid(form)
 
 
-class DeleteTeacher(DeleteView):
+class DeleteTeacher(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('sign_in')
     model = Teacher
     success_url = reverse_lazy('teachers:list')
 

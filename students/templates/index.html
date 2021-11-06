@@ -45,6 +45,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'sign_in' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'sign_in' %}">Login</a>
+                    </li>
+                {% endif %}
+
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'students:list' %}">Students table</a>
                 </li>
@@ -82,8 +92,7 @@
         <br>
         {% block content %}
         <h1>Welcome to LMS starting page!</h1>
-        <p class="lead">This website provides a chance to take a look at LMS fictional
-            students and teachers (courses soon as well).<br>
+        <p class="lead">This website provides a chance to take a look at LMS fictional students and teachers.<br>
             You can also <em>create</em> a new record, <em>edit</em> or <em>delete</em> an existing one - as you like!</p>
         <a class="btn btn-lg btn-primary" href="{% url 'students:list' %}" role="button">Start!</a>
         {% endblock %}

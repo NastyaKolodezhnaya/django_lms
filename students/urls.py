@@ -24,10 +24,11 @@ app_name = 'students'
 
 urlpatterns = [
     path('', GetStudents.as_view(), name='list'),
-    path('create/', CreateStudent.as_view(), name='create'),
     path('search/', search_students, name='search'),
+
+    path('create/', CreateStudent.as_view(), name='create'),
     path('update/<pk>/', UpdateStudent.as_view(), name='edit'),
-    path('delete/<pk>/', DeleteStudent.as_view(), name='delete')
+    path('delete/<pk>/', DeleteStudent.as_view(), name='delete'),
 ]
 
 handler404 = 'students.views.handle_error_404'
