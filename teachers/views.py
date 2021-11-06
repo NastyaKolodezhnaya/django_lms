@@ -36,6 +36,25 @@ class GetTeachers(ListView):
         }
 
 
+def search_teachers(request):
+    search_text = request.GET.get('search')
+    text_fields = ["first_name", "last_name", "email", 'course__name']
+
+    if search_text:
+        or_filter = Q()
+        for field in text_fields:
+            or_filter |= Q(**{f"{field}__icontains": search_text})
+        teachers = Teacher.objects.filter(or_filter)
+    else:
+        teachers = Teacher.objects.all()
+
+    return render(
+        request=request,
+        template_name="show_teachers.html",
+        context={"teachers_list": teachers},
+    )
+
+
 class CreateTeacher(CreateView):
     template_name = 'create_teacher.html'
     fields = "__all__"

@@ -1,8 +1,8 @@
 {% extends "index.html" %}
 
 {% block search %}
-<form class="d-flex" type="get" action="#" style="margin: 0">
-  <input class="d-flex" id="search_box" type="text" name="search_box"  placeholder="Search.." >
+<form class="d-flex" type="get" action="{% url 'teachers:search' %}" style="margin: 0">
+  <input class="d-flex" id="search_box" type="text" name="search"  placeholder="Search.." >
   <button class="btn btn-outline-success" id="search_submit" type="submit">Search</button>
 </form>
 {% endblock %}
