@@ -33,6 +33,8 @@
       <th scope="col">Email</th>
       <th scope="col">Phone number</th>
 <!--      <th scope="col">Course</th>-->
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
 
@@ -44,6 +46,14 @@
           <td>{{ teacher.email }}</td>
           <td>{{ teacher.phone_number }}</td>
 <!--          <td>{{ teacher.course }}</td>-->
+          <td>
+            <a type="button" class="btn btn-info" href="{% url 'teachers:edit' pk=teacher.id %}">Edit
+            </a>
+          </td>
+          <td>
+            <a type="button" class="btn btn-danger" href="{% url 'teachers:delete' pk=teacher.id %}">Delete
+            </a>
+          </td>
         </tr>
     {% endfor %}
   </tbody>

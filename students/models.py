@@ -33,9 +33,9 @@ class Student(Person):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     birthdate = models.DateField(null=True, blank=True, default=datetime.date.today, validators=[older_than_18])
 
-    avatar = models.ImageField(upload_to='media', null=True,
+    avatar = models.ImageField(upload_to='avatar', null=True,
                                blank=True)
-    resume = models.FileField(upload_to='static', null=True,
+    resume = models.FileField(upload_to='resume', null=True,
                               blank=True)
 
     course = models.ForeignKey(
