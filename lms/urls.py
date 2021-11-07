@@ -19,8 +19,7 @@ from students.views import IndexPage
 from django.conf.urls.static import static
 from django.conf import settings
 
-from students.views import LoginStudent, LogoutStudent, StudentSignIn, RegistrationStudent
-
+from students.views import LoginStudent, LogoutStudent, StudentSignIn, RegistrationStudent, ActivateUser
 
 
 urlpatterns = [
@@ -31,6 +30,7 @@ urlpatterns = [
     path('registration/', RegistrationStudent.as_view(), name='registration'),
     path('login/', LoginStudent.as_view(), name='login'),
     path('logout/', LogoutStudent.as_view(), name='logout'),
+    path('activate/<str:uidb64>/<str:token>', ActivateUser.as_view(), name='activate'),
 
     path('students/', include('students.urls')),
     path('teachers/', include('teachers.urls'))

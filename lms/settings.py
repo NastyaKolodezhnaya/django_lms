@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'django_extensions',
+    "django_inlinecss",
 
     'students',
     'teachers',
@@ -106,6 +107,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'lms.kolodezhna@gmail.com'
+EMAIL_HOST_PASSWORD = "mqiybvpojgkhamou"
+EMAIL_PORT = 587
 
 
 # Internationalization

@@ -12,6 +12,7 @@ django-extensions = "*"
 fields = "*"
 django-crispy-forms = "*"
 pillow = "*"
+django-inlinecss = "*"
 
 [dev-packages]
 
