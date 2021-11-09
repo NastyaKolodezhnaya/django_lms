@@ -30,10 +30,8 @@
       <th scope="col">First name</th>
       <th scope="col">Last name</th>
       <th scope="col">Email</th>
-<!--      <th scope="col">Phone number</th>-->
       <th scope="col">Course</th>
       <th scope="col">Resume</th>
-      <th scope="col">Edit</th>
       <th scope="col">Delete</th>
     </tr>
   </thead>
@@ -56,10 +54,6 @@
             <a href="{{ student.resume.url }}"
                download="{{ student.first_name }}_{{ student.last_name }}_resume">Download</a>
             {% endif %}
-          </td>
-          <td>
-            <a type="button" class="btn btn-info" href="{% url 'students:edit' pk=student.id %}">Edit
-            </a>
           </td>
           <td>
             <a type="button" class="btn btn-danger" href="{% url 'students:delete' pk=student.id %}">Delete

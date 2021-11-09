@@ -17,7 +17,7 @@ from django.urls import path
 from students.views import handle_error_404
 from django.conf.urls import handler404
 
-from students.views import (GetStudents, CreateStudent, UpdateStudent, DeleteStudent, search_students)
+from students.views import (GetStudents, DeleteStudent, search_students)
 
 
 app_name = 'students'
@@ -26,9 +26,9 @@ urlpatterns = [
     path('', GetStudents.as_view(), name='list'),
     path('search/', search_students, name='search'),
 
-    path('create/', CreateStudent.as_view(), name='create'),
-    path('update/<pk>/', UpdateStudent.as_view(), name='edit'),
-    path('delete/<pk>/', DeleteStudent.as_view(), name='delete'),
+    # path('create/', CreateStudent.as_view(), name='create'),
+    # path('update/<pk>/', UpdateStudent.as_view(), name='edit'),
+    path('delete/<pk>/', DeleteStudent.as_view(), name='delete')
 ]
 
 handler404 = 'students.views.handle_error_404'
