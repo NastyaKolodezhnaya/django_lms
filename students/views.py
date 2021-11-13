@@ -80,7 +80,7 @@ class ActivateUser(RedirectView):
     def get(self, request, uidb64, token, *args, **kwargs):
         try:
             user_pk = force_bytes(urlsafe_base64_decode(uidb64))
-            current_user = User.objects.get(pk=user_pk)
+            current_user = get_user_model().objects.get(pk=user_pk)
         except (User.DoesNotExist, ValueError, TypeError):
             # create an html template saying 'Seems, you entered an invalid data! There is no such page, sorry!'
             return HttpResponse("Invalid data")
@@ -106,7 +106,7 @@ class GetStudents(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         # method must return a dict like 'extra_context' was
         course_id = self.kwargs.get('course')
-        students = self.model.objects.filter(type='student')
+        students = self.model.objects.all()
         courses = Course.objects.all()
 
         if course_id:
