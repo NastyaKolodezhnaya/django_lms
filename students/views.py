@@ -36,16 +36,12 @@ class IndexPage(TemplateView):
     template_name = 'index.html'
 
 
-# need to refresh the page over & over again to reload modified data in the table :/
 class GetStudents(ListView):
     model = Student
     template_name = 'show.html'
-    # extra_context = {'students_list': students,
-    #                  'courses_list': Course.objects.all()}
 
     def get_context_data(self, **kwargs):
-        # method must return a dict like 'extra_context' was
-        course_id = self.kwargs.get('course')
+        course_id = self.request.GET.get('course')
         students = self.model.objects.all()
         courses = Course.objects.all()
 
@@ -57,24 +53,24 @@ class GetStudents(ListView):
         }
 
 
-def search_students(request):
-    search_text = request.GET.get('search')
-    text_fields = ["first_name", "last_name", "email", 'course__name']
+class SearchStudent(ListView):
+    model = Student
+    template_name = 'show.html'
 
-    if search_text:
-        or_filter = Q()
-        for field in text_fields:
-            or_filter |= Q(**{f"{field}__icontains": search_text})
-        students_rec = Student.objects.filter(or_filter)
-    else:
-        students_rec = Student.objects.all()
+    def get_context_data(self, **kwargs):
+        search_text = self.request.GET.get('search')
+        students = self.model.objects.all()
+        text_fields = ["first_name", "last_name", "email", 'course__name']
 
-    return render(
-        request=request,
-        template_name="show.html",
-        context={"students_list": students_rec},
-    )
-# search_teacher view !!
+        if search_text:
+            or_filter = Q()
+            for field in text_fields:
+                or_filter |= Q(**{f"{field}__icontains": search_text})
+            students = Student.objects.filter(or_filter)
+
+        return {
+            'students_list': students
+        }
 
 
 class CreateStudent(CreateView):
