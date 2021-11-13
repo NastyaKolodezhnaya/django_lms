@@ -3,7 +3,7 @@ from django.core.validators import ValidationError
 
 from students.models import UserProfile
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationFormy
+from django.contrib.auth.forms import UserCreationForm
 
 
 class RegistrationStudentForm(UserCreationForm):
