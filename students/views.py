@@ -15,7 +15,7 @@ from django.template import RequestContext
 
 from students.forms import RegistrationStudentForm
 from students.services.email_functions import send_registration_email
-from students.models import UserProfile
+from students.models import UserProfile, Student
 from courses.models import Course
 from django.contrib.auth.models import User
 
@@ -82,7 +82,7 @@ class ActivateUser(RedirectView):
             user_pk = force_bytes(urlsafe_base64_decode(uidb64))
             current_user = User.objects.get(pk=user_pk)
         except (User.DoesNotExist, ValueError, TypeError):
-            # create an html template saying 'Seems, you entered an invalid data! There is no such page, sorry!'
+            # create an html template saying 'Seems, you entered an invalid data! There is no such page!'
             return HttpResponse("Invalid data")
 
         if current_user:
@@ -98,15 +98,12 @@ class ActivateUser(RedirectView):
 
 class GetStudents(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('sign_in')
-    model = UserProfile
+    model = Student
     template_name = 'show.html'
-    # extra_context = {'students_list': students,
-    #                  'courses_list': Course.objects.all()}
 
     def get_context_data(self, **kwargs):
-        # method must return a dict like 'extra_context' was
-        course_id = self.kwargs.get('course')
-        students = self.model.objects.filter(type='student')
+        course_id = self.request.GET.get('course')
+        students = self.model.objects.all()
         courses = Course.objects.all()
 
         if course_id:
@@ -117,27 +114,67 @@ class GetStudents(LoginRequiredMixin, ListView):
         }
 
 
-def search_students(request):
-    search_text = request.GET.get('search')
-    text_fields = ["first_name", "last_name", "email", 'course__name']
-    students = self.model.objects.filter(type='student')
+class SearchStudent(ListView):
+    model = Student
+    template_name = 'show.html'
 
-    if search_text:
-        or_filter = Q()
-        for field in text_fields:
-            or_filter |= Q(**{f"{field}__icontains": search_text})
-        students = students.filter(or_filter)
+    def get_context_data(self, **kwargs):
+        search_text = self.request.GET.get('search')
+        students = self.model.objects.all()
+        text_fields = ["first_name", "last_name", "email", 'course__name']
 
-    return render(
-        request=request,
-        template_name="show.html",
-        context={"students_list": students},
-    )
+        if search_text:
+            or_filter = Q()
+            for field in text_fields:
+                or_filter |= Q(**{f"{field}__icontains": search_text})
+            students = Student.objects.filter(or_filter)
+
+        return {
+            'students_list': students
+        }
+
+
+class CreateStudent(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('sign_in')
+    template_name = 'create.html'
+    fields = "__all__"
+    model = Student
+    success_url = reverse_lazy('students:list')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        # TODO: add validation to the model 'validator' list!!
+        first_name = form.cleaned_data["first_name"]
+        last_name = form.cleaned_data["last_name"]
+        if first_name == last_name:
+            form._errors["first_name"] = ErrorList(["First and last name cannot be equal, bro!"])
+            form._errors["last_name"] = ErrorList(["First and last name cannot be equal, bro!"])
+            return super().form_invalid(form)
+        return super().form_valid(form)
+
+
+class UpdateStudent(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('sign_in')
+    template_name = 'edit.html'
+    fields = "__all__"
+    model = Student
+    success_url = reverse_lazy('students:list')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        # TODO: add validation to the model 'validator' list!!
+        first_name = form.cleaned_data["first_name"]
+        last_name = form.cleaned_data["last_name"]
+        if first_name == last_name:
+            form._errors["first_name"] = ErrorList(["First and last name cannot be equal, bro!"])
+            form._errors["last_name"] = ErrorList(["First and last name cannot be equal, bro!"])
+            return super().form_invalid(form)
+        return super().form_valid(form)
 
 
 class DeleteStudent(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('sign_in')
-    model = UserProfile
+    model = Student
     success_url = reverse_lazy('students:list')
 
     def get(self, request, *args, **kwargs):
