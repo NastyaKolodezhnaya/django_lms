@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_extensions',
     "django_inlinecss",
+    "social_django",
 
     'students',
     'teachers',
@@ -54,11 +55,26 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "social_django.middleware.SocialAuthExceptionMiddleware"
 ]
 
 ROOT_URLCONF = 'lms.urls'
 
-LOGIN_REDIRECT_URL = '/'
+
+# SOCIAL_AUTH_FACEBOOK_KEY = ""
+# SOCIAL_AUTH_FACEBOOK_SECRET = ""
+
+SOCIAL_AUTH_GITHUB_KEY = "151666"
+SOCIAL_AUTH_GITHUB_SECRET = "f3fdf4e7cc8d3a4bd985b85344b06c2c5844ad6e"
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "1075856178234-gsc480t29p965vnm8ah7f0ss5nj4segi.apps.googleusercontent.com"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
+
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = ''
+
 
 TEMPLATES = [
     {
@@ -71,6 +87,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
         },
     },
@@ -88,6 +106,14 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+AUTHENTICATION_BACKENDS = (
+    # "social_core.backends.facebook.FacebookOAuth2",
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    "django.contrib.auth.backends.ModelBackend"
+)
 
 
 # Password validation
@@ -137,14 +163,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/resume/'
+STATIC_URL = '/resume'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'media'),
     )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-MEDIA_URL = '/avatar/'
+MEDIA_URL = '/avatar'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
@@ -154,3 +180,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
+
+    # 'students.services.facebook_pipeline.cleanup_social_account',
+    'students.services.github_oauth.cleanup_social_account',
+
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details'
+)

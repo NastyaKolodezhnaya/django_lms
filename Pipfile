@@ -13,6 +13,8 @@ fields = "*"
 django-crispy-forms = "*"
 pillow = "*"
 django-inlinecss = "*"
+social-auth-app-django = "*"
+python-social-auth = "*"
 
 [dev-packages]
 
