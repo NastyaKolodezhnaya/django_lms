@@ -73,7 +73,10 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
 
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = '/'
+
+# SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+# SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['state']
 
 
 TEMPLATES = [
@@ -163,14 +166,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/resume'
+STATIC_URL = '/resume/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'media'),
     )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-MEDIA_URL = '/avatar'
+MEDIA_URL = '/avatar/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
