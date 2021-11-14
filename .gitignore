@@ -1,0 +1,9 @@
+.idea/django_lms.iml
+.idea/workspace.xml
+.idea/misc.xml
+*.pyc
+.*
+venv
+db.sqlite3
+.idea/
+#migrations/
