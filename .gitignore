@@ -7,4 +7,3 @@ venv
 db.sqlite3
 .idea/
 #migrations/
-archive/
