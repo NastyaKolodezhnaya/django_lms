@@ -10,7 +10,6 @@ from django.template import RequestContext
 def send_registration_email(request, user_instance):
     mail_subject = 'LMS account activation'
 
-    # activation_url = f'http://{get_current_site(request).domain}{ActivateUser.get(request, uidb64=uid, token=token)}'
     mail_body = render_to_string('emails/registration_email.html',
                                  {'user': user_instance,
                                   'domain': get_current_site(request).domain,

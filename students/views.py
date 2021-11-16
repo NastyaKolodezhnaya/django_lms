@@ -46,7 +46,7 @@ def handle_error_404(request, exception):
 class IndexPage(TemplateView):
     template_name = 'index.html'
 
-
+    
 class StudentSignIn(TemplateView):
     template_name = 'registration/sign_in.html'
 
@@ -62,8 +62,7 @@ class LogoutStudent(LogoutView):
 class RegistrationStudent(CreateView):
     template_name = 'registration/registration.html'
     form_class = RegistrationStudentForm
-    # create an html template saying 'Thanks for registration! We've sent you a confirmation letter, check it out!'
-    success_url = reverse_lazy('start')
+    success_url = reverse_lazy('sign_in')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -78,6 +77,8 @@ class ActivateUser(RedirectView):
     url = reverse_lazy('start')
 
     def get(self, request, uidb64, token, *args, **kwargs):
+        print(f'token: {token}')
+
         try:
             user_pk = force_bytes(urlsafe_base64_decode(uidb64))
             current_user = get_user_model().objects.get(pk=user_pk)
@@ -85,8 +86,10 @@ class ActivateUser(RedirectView):
             # create an html template saying 'Seems, you entered an invalid data! There is no such page!'
             return HttpResponse("Invalid data")
 
-        if current_user:
-            # if TokenGenerator().check_token(current_user, token): - token is not valid :\
+        if current_user.is_active:
+            return HttpResponse("You have already successfully confirmed your registration!")
+
+        if current_user and TokenGenerator().check_token(current_user, token):
             current_user.is_active = True
             current_user.save()
 
