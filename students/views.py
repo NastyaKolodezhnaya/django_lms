@@ -11,11 +11,15 @@ from django.urls import reverse, reverse_lazy
 from django.shortcuts import render
 from django.template import RequestContext
 
-from students.forms import StudentCreateForm
+from students.forms import StudentCreateForm, RegistrationStudentForm
 from students.models import Student
 from courses.models import Course
 
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.views import LoginView, LogoutView
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 parser = DjangoParser()
 
@@ -35,8 +39,35 @@ def handle_error_404(request, exception):
 class IndexPage(TemplateView):
     template_name = 'index.html'
 
+    
+class StudentSignIn(TemplateView):
+    template_name = 'registration/sign_in.html'
 
-class GetStudents(ListView):
+
+class RegistrationStudent(CreateView):
+    template_name = 'registration/registration.html'
+    form_class = RegistrationStudentForm
+    success_url = reverse_lazy('sign_in')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        # self.object.is_active = False
+        # self.object.save()
+        # send_registration_email(request=self.request,
+        #                         user_instance=self.object)
+        return super().form_valid(form)
+
+
+class LoginStudent(LoginView):
+    success_url = reverse_lazy('start')
+
+
+class LogoutStudent(LogoutView):
+    template_name = 'index.html'
+
+
+class GetStudents(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('sign_in')
     model = Student
     template_name = 'show.html'
 
@@ -73,7 +104,8 @@ class SearchStudent(ListView):
         }
 
 
-class CreateStudent(CreateView):
+class CreateStudent(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('sign_in')
     template_name = 'create.html'
     fields = "__all__"
     model = Student
@@ -91,7 +123,8 @@ class CreateStudent(CreateView):
         return super().form_valid(form)
 
 
-class UpdateStudent(UpdateView):
+class UpdateStudent(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('sign_in')
     template_name = 'edit.html'
     fields = "__all__"
     model = Student
@@ -109,7 +142,8 @@ class UpdateStudent(UpdateView):
         return super().form_valid(form)
 
 
-class DeleteStudent(DeleteView):
+class DeleteStudent(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('sign_in')
     model = Student
     success_url = reverse_lazy('students:list')
 
