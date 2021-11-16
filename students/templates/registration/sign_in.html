@@ -13,14 +13,26 @@
 
         <ul>
             <li>
-                <p class="lead"><em>Already have an account?</em></p>
-                <a class="btn btn-lg btn-primary" href="{% url 'login' %}" role="button">Login</a>
+                <p class="lead"><em>Already have an LMS account?</em></p>
+                <a class="btn btn-lg btn-warning" href="{% url 'login' %}" role="button">Login</a>
             </li>
-            <br><br>
+            <br>
 
             <li>
                 <p class="lead"><em>Want to create a new user?</em></p>
-                <a class="btn btn-lg btn-primary" href="{% url 'registration' %}" role="button">Sign up</a>
+                <a class="btn btn-lg btn-success" href="{% url 'registration' %}" role="button">Sign up</a>
+            </li>
+            <br>
+
+            <li>
+                <p class="lead"><em>Have a GitHub account?</em></p>
+                <a class="btn btn-lg btn-secondary" href="{% url 'social:begin' 'github' %}" role="button">GitHub</a>
+            </li>
+            <br>
+
+            <li>
+                <p class="lead"><em>Have a Google account?</em></p>
+                <a class="btn btn-lg btn-primary" href="{% url 'social:begin' 'google-oauth2' %}" role="button">Google</a>
             </li>
         </ul>
 

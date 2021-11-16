@@ -81,7 +81,7 @@ class ActivateUser(RedirectView):
 
         try:
             user_pk = force_bytes(urlsafe_base64_decode(uidb64))
-            current_user = User.objects.get(pk=user_pk)
+            current_user = get_user_model().objects.get(pk=user_pk)
         except (User.DoesNotExist, ValueError, TypeError):
             # create an html template saying 'Seems, you entered an invalid data! There is no such page!'
             return HttpResponse("Invalid data")
@@ -146,7 +146,6 @@ class CreateStudent(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        # TODO: add validation to the model 'validator' list!!
         first_name = form.cleaned_data["first_name"]
         last_name = form.cleaned_data["last_name"]
         if first_name == last_name:
@@ -165,7 +164,6 @@ class UpdateStudent(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        # TODO: add validation to the model 'validator' list!!
         first_name = form.cleaned_data["first_name"]
         last_name = form.cleaned_data["last_name"]
         if first_name == last_name:

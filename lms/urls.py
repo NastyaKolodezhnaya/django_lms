@@ -25,6 +25,7 @@ from students.views import LoginStudent, LogoutStudent, StudentSignIn, Registrat
 urlpatterns = [
     path('', IndexPage.as_view(), name='start'),
     path('admin/', admin.site.urls),
+    path('authentication', include('social_django.urls'), name='social'),
 
     path('sign_in/', StudentSignIn.as_view(), name='sign_in'),
     path('registration/', RegistrationStudent.as_view(), name='registration'),
