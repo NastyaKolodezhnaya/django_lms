@@ -1,87 +1,100 @@
-from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
+from django.db.models import Q
+from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from webargs.djangoparser import use_args, use_kwargs
 from webargs import fields
 
 import teachers
-from teachers.forms import TeacherCreateForm
 from teachers.models import Teacher
-from utils import format_records
+from courses.models import Course
+
+from django.shortcuts import render
+from django.template import RequestContext
+from teachers.forms import TeacherCreateForm
+
+from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DeleteView
 
 
 # Create your views here.
-@use_args({
-    "text": fields.Str(
-        required=False
-    )},
-    location="query"
-)
-def get_teachers(request, params):
-    teachers_rec = Teacher.objects.all().order_by('-id')
-    text_fields = ['first_name', 'last_name', 'specialization', 'email']
+class GetTeachers(ListView):
+    model = Teacher
+    template_name = 'show_teachers.html'
 
-    form = """
-        <form >
-          <label>Text:</label><br>
-          <input type="text" name="text" placeholder="Enter text to search"><br><br>
+    def get_context_data(self, **kwargs):
+        # method must return a dict like 'extra_context' was
+        course_id = self.kwargs.get('course')
+        teachers = self.model.objects.all()
+        courses = Course.objects.all()
 
-          <input type="submit" value="Search">
-        </form>
-        """
-
-    for param_key, param_value in params.items():
-        if param_value:
-            if param_key == 'text':
-                or_filter = Q()
-                for field in text_fields:
-                    # or_filter = Q() | Q(**{f'{field}__contains': param_value})
-                    or_filter |= Q(**{f'{field}__contains': param_value})
-                teachers_rec = teachers_rec.filter(or_filter)
-
-    result = format_records(teachers_rec, 'teachers')
-    return HttpResponse(form + result)
+        if course_id:
+            teachers = teachers.filter(course__id__contains=course_id)
+        return {
+            'teachers_list': teachers,
+            'courses_list': courses
+        }
 
 
-@csrf_exempt
-def create_teacher(request):
+class SearchTeacher(ListView):
+    model = Teacher
+    template_name = 'show_teachers.html'
 
-    if request.method == 'POST':
-        form = TeacherCreateForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('teachers:list'))
+    def get_context_data(self, **kwargs):
+        search_text = self.request.GET.get('search')
+        teachers = self.model.objects.all()
+        text_fields = ["first_name", "last_name", "email", 'course__name']
 
-    # elif request.method == 'GET':
-    form = TeacherCreateForm()
-    form_html = f"""
-        <form method="POST">
-          {form.as_p()}
-          <input type="submit" value="Create">
-        </form>
-        """
+        if search_text:
+            or_filter = Q()
+            for field in text_fields:
+                or_filter |= Q(**{f"{field}__icontains": search_text})
+            teachers = Teacher.objects.filter(or_filter)
 
-    return HttpResponse(form_html)
+        return {
+            'teachers_list': teachers
+        }
 
 
-@csrf_exempt
-def update_teacher(request, pk):
+class CreateTeacher(CreateView):
+    template_name = 'create_teacher.html'
+    fields = "__all__"
+    model = Teacher
+    success_url = reverse_lazy('teachers:list')
 
-    teacher = get_object_or_404(Teacher, id=pk)
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        # TODO: add validation to the model 'validator' list!!
+        first_name = form.cleaned_data["first_name"]
+        last_name = form.cleaned_data["last_name"]
+        if first_name == last_name:
+            form._errors["first_name"] = ErrorList(["First and last name cannot be equal, bro!"])
+            form._errors["last_name"] = ErrorList(["First and last name cannot be equal, bro!"])
+            return super().form_invalid(form)
+        return super().form_valid(form)
 
-    if request.method == "POST":
-        form = TeacherCreateForm(request.POST, instance=teacher)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse("teachers:list"))
 
-    form = TeacherCreateForm(instance=teacher)
-    form_html = f"""
-    <form method="POST">
-      {form.as_p()}
-      <input type="submit" value="Save">
-    </form>
-    """
-    return HttpResponse(form_html)
+class UpdateTeacher(UpdateView):
+    template_name = 'edit_teacher.html'
+    fields = "__all__"
+    model = Teacher
+    success_url = reverse_lazy('teachers:list')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+
+        first_name = form.cleaned_data["first_name"]
+        last_name = form.cleaned_data["last_name"]
+        if first_name == last_name:
+            form._errors["first_name"] = ErrorList(["First and last name cannot be equal, bro!"])
+            form._errors["last_name"] = ErrorList(["First and last name cannot be equal, bro!"])
+            return super().form_invalid(form)
+        return super().form_valid(form)
+
+
+class DeleteTeacher(DeleteView):
+    model = Teacher
+    success_url = reverse_lazy('teachers:list')
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)

@@ -1,14 +1,11 @@
-import datetime
-import uuid
-
 from faker import Faker
+import datetime
 
+import uuid
 from django.db import models
 from django.core.validators import MinLengthValidator, RegexValidator
-# from phonenumber_field.modelfields import PhoneNumberField
-
-
 from students.validators import no_elon_validator, prohibited_domains, older_than_18
+# from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Person(models.Model):
@@ -36,13 +33,13 @@ class Student(Person):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     birthdate = models.DateField(null=True, blank=True, default=datetime.date.today, validators=[older_than_18])
 
-    avatar = models.ImageField(upload_to='media', null=True,
+    avatar = models.ImageField(upload_to='avatar', null=True,
                                blank=True)
-    resume = models.FileField(upload_to='static', null=True,
+    resume = models.FileField(upload_to='resume', null=True,
                               blank=True)
 
     course = models.ForeignKey(
-        "students.Course", null=True, blank=True, related_name="student_course", on_delete=models.SET_NULL
+        "courses.Course", null=True, blank=True, related_name="student_course", on_delete=models.SET_NULL
     )
 
     def __str__(self):
@@ -71,49 +68,7 @@ class Student(Person):
             st.save()
 
 
-class Course(models.Model):
-    id = models.UUIDField(primary_key=True, unique=True,
-                          default=uuid.uuid4,
-                          editable=False)
-    name = models.CharField(null=False, max_length=100)
-    start_date = models.DateField(null=True, default=datetime.date.today())
-    count_of_students = models.IntegerField(default=0)
-    room = models.ForeignKey(
-        "students.Room", null=True, blank=True, related_name="courses", on_delete=models.SET_NULL
-    )
-
-    def __str__(self):
-        return f"{self.name}"
-
-
-class Teacher(Person):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    course = models.ManyToManyField(to="students.Course", related_name="teacher_course")
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}, ({self.id})"
-
-
-class Room(models.Model):
-    location = models.CharField(
-        max_length=100,
-        null=True,
-        blank=True,
-    )
-    color = models.ForeignKey("students.Color", null=True, on_delete=models.SET_NULL)
-
-    def __str__(self):
-        return f"{self.location}, {self.color}"
-
-
-class Color(models.Model):
-    name = models.CharField(max_length=100, null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.name}"
-
-
-class Invitations(models.Model):
+# class Invitations(models.Model):
     # 1st option
     # id = models.UUIDField(primary_key=True, unique=True,
     #                       default=uuid.uuid4,
@@ -126,6 +81,6 @@ class Invitations(models.Model):
     # & add 'count' field to Student model depending on the count of Invitations records with student's id
 
     # 2nd option
-    old_student = models.ForeignKey("students.Student", null=False, blank=False, related_name="inviter",
-                                    on_delete=models.RESTRICT)
-    count = models.IntegerField(default=0)
+    # old_student = models.ForeignKey("students.Student", null=False, blank=False, related_name="inviter",
+    #                                 on_delete=models.RESTRICT)
+    # count = models.IntegerField(default=0)
