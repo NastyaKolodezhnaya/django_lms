@@ -29,8 +29,8 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
-
 INSTALLED_APPS = [
+    'admin_black.apps.AdminBlackConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,6 +77,9 @@ LOGIN_REDIRECT_URL = '/'
 
 # SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 # SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['state']
+
+
+AUTH_USER_MODEL = 'students.CustomUser'
 
 
 TEMPLATES = [
@@ -136,9 +139,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-AUTH_USER_MODEL = 'students.CustomUser'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -26,7 +26,7 @@ class GetTeachers(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         # method must return a dict like 'extra_context' was
-        course_id = self.kwargs.get('course')
+        course_id = self.request.GET.get('course')
         teachers = self.model.objects.all()
         courses = Course.objects.all()
 

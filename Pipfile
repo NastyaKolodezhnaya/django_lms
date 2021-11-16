@@ -15,6 +15,7 @@ pillow = "*"
 django-inlinecss = "*"
 social-auth-app-django = "*"
 python-social-auth = "*"
+django-admin-black = "*"
 
 [dev-packages]
 

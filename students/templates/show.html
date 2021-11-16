@@ -13,6 +13,9 @@
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
           aria-expanded="false">Choose a course</button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li>
+      <a class="dropdown-item" href="http://127.0.0.1:8000/students/">--all courses--</a>
+    </li>
     {% for course in courses_list %}
     <li>
       <a class="dropdown-item" href="http://127.0.0.1:8000/students/?course={{ course.id }}">{{ course.name }}</a>
