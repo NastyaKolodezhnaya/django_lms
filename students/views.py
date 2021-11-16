@@ -39,7 +39,7 @@ def handle_error_404(request, exception):
 class IndexPage(TemplateView):
     template_name = 'index.html'
 
-
+    
 class StudentSignIn(TemplateView):
     template_name = 'registration/sign_in.html'
 
