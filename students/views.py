@@ -46,7 +46,7 @@ def handle_error_404(request, exception):
 class IndexPage(TemplateView):
     template_name = 'index.html'
 
-
+    
 class StudentSignIn(TemplateView):
     template_name = 'registration/sign_in.html'
 
@@ -62,8 +62,7 @@ class LogoutStudent(LogoutView):
 class RegistrationStudent(CreateView):
     template_name = 'registration/registration.html'
     form_class = RegistrationStudentForm
-    # create an html template saying 'Thanks for registration! We've sent you a confirmation letter, check it out!'
-    success_url = reverse_lazy('start')
+    success_url = reverse_lazy('sign_in')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

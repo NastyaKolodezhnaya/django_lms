@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('courses', '0004_alter_course_start_date'),
+        ('courses', '0001_initial'),
     ]
 
     operations = [
