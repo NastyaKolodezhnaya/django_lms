@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
-    'admin_black.apps.AdminBlackConfig',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
     'students',
     'teachers',
-    'courses'
+    'courses',
 ]
 
 MIDDLEWARE = [
