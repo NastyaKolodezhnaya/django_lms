@@ -24,6 +24,7 @@ from students.views import LoginStudent, LogoutStudent, StudentSignIn, Registrat
 
 urlpatterns = [
     path('', IndexPage.as_view(), name='start'),
+    path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('authentication', include('social_django.urls'), name='social'),
 

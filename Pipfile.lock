@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "6e2e1831b99000cb0ef82860304377f12190300e68b345a8121cc1f0e303f049"
+            "sha256": "af766dfd834fdda1d28b64247d21b527c9fc990cfbbd712c784df324f47419e4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -175,6 +175,14 @@
             "index": "pypi",
             "version": "==3.2.7"
         },
+        "django-baton": {
+            "hashes": [
+                "sha256:d1506182834fe1e014670117352c660e0d569053764d7d61e11f24ac2f0b5395",
+                "sha256:d9c40c3a2a756ef14906e4ff19f0997d11ca7b4b6f7abff3b59326139626a9e6"
+            ],
+            "index": "pypi",
+            "version": "==2.2.3"
+        },
         "django-crispy-forms": {
             "hashes": [
                 "sha256:4dc9e5263c91c5f51766806a050ca2ec5c349d34c5cd91fcca3a1a0363b5e29e",
@@ -191,6 +199,14 @@
             "index": "pypi",
             "version": "==3.1.5"
         },
+        "django-grappelli": {
+            "hashes": [
+                "sha256:e21dc664faef6990006c05a6939ee1e2839e13834a338b1f644ea6edb19f68de",
+                "sha256:edfb8539d000d5908836d909134021c6b3ab3bd2975e7524385b9b3736548598"
+            ],
+            "index": "pypi",
+            "version": "==2.15.3"
+        },
         "django-inlinecss": {
             "hashes": [
                 "sha256:5a014278b017a07d9d0babe2bf1bc75a52e184fb0ed26e333e8ff0d8e777b9e2",
@@ -201,11 +217,11 @@
         },
         "faker": {
             "hashes": [
-                "sha256:b9ea5970f43c1fa05443d1885fbed822aba816facefa053d3d20168bfef4ae84",
-                "sha256:cfe4eed0309cd5325c40817519f8fbb18281a3f43a9a23fe03e3e7f091a9775b"
+                "sha256:393bd1b5becf3ccbc04a4f0f13da7e437914b24cafd1a4d8b71b5fecff54fb34",
+                "sha256:876ba213aaddd661a539ada2158917c1be17064b72792ee788b81c13528865d0"
             ],
             "index": "pypi",
-            "version": "==9.8.1"
+            "version": "==9.8.2"
         },
         "fields": {
             "hashes": [
@@ -240,19 +256,19 @@
         },
         "jedi": {
             "hashes": [
-                "sha256:18456d83f65f400ab0c2d3319e48520420ef43b23a086fdc05dff34132f0fb93",
-                "sha256:92550a404bad8afed881a137ec9a461fed49eca661414be45059329614ed0707"
+                "sha256:637c9635fcf47945ceb91cd7f320234a7be540ded6f3e99a50cb6febdfd1ba8d",
+                "sha256:74137626a64a99c8eb6ae5832d99b3bdd7d29a3850fe2aa80a4126b2a7d949ab"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==0.18.0"
+            "version": "==0.18.1"
         },
         "marshmallow": {
             "hashes": [
-                "sha256:6d00e42d6d6289f8cd3e77618a01689d57a078fe324ee579b00fa206d32e9b07",
-                "sha256:bba1a940985c052c5cc7849f97da196ebc81f3b85ec10c56ef1f3228aa9cbe74"
+                "sha256:04438610bc6dadbdddb22a4a55bcc7f6f8099e69580b2e67f5a681933a1f4400",
+                "sha256:4c05c1684e0e97fe779c62b91878f173b937fe097b356cd82f793464f5bc6138"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==3.14.0"
+            "version": "==3.14.1"
         },
         "matplotlib-inline": {
             "hashes": [
@@ -437,7 +453,7 @@
                 "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926",
                 "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "index": "pypi",
             "version": "==1.16.0"
         },
         "social-auth-app-django": {
