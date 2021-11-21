@@ -20,6 +20,9 @@ class StudentAdmin(admin.ModelAdmin):
     def course_applied(self, instance):
         if instance.course:
             course = instance.course
+            # url = (reverse("admin:courses_course_change") + "?" + urlencode({"course__id": f"{course.id}"}))
+            # return format_html('<a href="{url}">{course.name}</a>')
+
             return format_html(
                 f'<a href="http://127.0.0.1:8000/admin/courses/course/{course.pk}/change/">{course.name}</a>')
 

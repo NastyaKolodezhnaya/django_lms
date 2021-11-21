@@ -74,12 +74,6 @@ class UserProfile(models.Model):
         return f"{self.user.first_name}_{self.user.last_name}"
 
 
-@receiver(post_save, sender=get_user_model())
-def update_profile_signal(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-
-
 class Person(models.Model):
     first_name = models.CharField(
         max_length=60, null=False, validators=[MinLengthValidator(2)]

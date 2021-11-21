@@ -26,7 +26,7 @@ urlpatterns = [
     path('', IndexPage.as_view(), name='start'),
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
-    path('authentication', include('social_django.urls'), name='social'),
+    path('authentication', include('social_django.urls', namespace='social')),
 
     path('sign_in/', StudentSignIn.as_view(), name='sign_in'),
     path('registration/', RegistrationStudent.as_view(), name='registration'),

@@ -18,6 +18,7 @@ from students.services.email_functions import send_registration_email
 from students.models import UserProfile, Student
 from courses.models import Course
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, RedirectView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -87,13 +88,13 @@ class ActivateUser(RedirectView):
             return HttpResponse("Invalid data")
 
         if current_user.is_active:
-            return HttpResponse("You have already successfully confirmed your registration!")
+            return super().get(request, *args, **kwargs)
 
         if current_user and TokenGenerator().check_token(current_user, token):
             current_user.is_active = True
             current_user.save()
 
-            login(request, current_user)
+            login(request, current_user, backend='django.contrib.auth.backends.ModelBackend')
             return super().get(request, *args, **kwargs)
 
         return HttpResponse("Invalid data")
