@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from students.views import IndexPage
+from users.views import IndexPage
 from django.conf.urls.static import static
 from django.conf import settings
 
-from students.views import LoginStudent, LogoutStudent, StudentSignIn, RegistrationStudent, ActivateUser
+from users.views import LoginUser, LogoutUser, UserSignIn, RegistrationUser, ActivateUser
+
+from users.views import handle_error_404
+from django.conf.urls import handler404
 
 
 urlpatterns = [
@@ -28,12 +31,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('authentication', include('social_django.urls', namespace='social')),
 
-    path('sign_in/', StudentSignIn.as_view(), name='sign_in'),
-    path('registration/', RegistrationStudent.as_view(), name='registration'),
-    path('login/', LoginStudent.as_view(), name='login'),
-    path('logout/', LogoutStudent.as_view(), name='logout'),
-    path('activate/<str:uidb64>/<str:token>', ActivateUser.as_view(), name='activate'),
-
+    path('users/', include('users.urls')),
     path('students/', include('students.urls')),
     path('teachers/', include('teachers.urls'))
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'users.views.handle_error_404'

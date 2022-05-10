@@ -13,11 +13,14 @@ fields = "*"
 django-crispy-forms = "*"
 pillow = "*"
 django-inlinecss = "*"
-social-auth-app-django = "*"
-python-social-auth = "*"
 six = "*"
 django-baton = "*"
 django-grappelli = "*"
+python-dotenv = "*"
+social-auth-app-django = "*"
+python-social-auth = "==0.2.21"
+social-auth-core = "*"
+rest-social-auth = "*"
 
 [dev-packages]
 

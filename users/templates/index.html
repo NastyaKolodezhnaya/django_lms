@@ -48,11 +48,11 @@
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"
-                           href="{% url 'sign_in' %}">{{ user.email }}</a>
+                           href="{% url 'users:sign_in' %}">{{ user.email }}</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'sign_in' %}">Login</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'users:sign_in' %}">Login</a>
                     </li>
                 {% endif %}
 

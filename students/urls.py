@@ -14,8 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from students.views import handle_error_404
-from django.conf.urls import handler404
 
 from students.views import (GetStudents, CreateStudent, UpdateStudent, DeleteStudent, SearchStudent)
 
@@ -30,5 +28,3 @@ urlpatterns = [
     path('update/<pk>/', UpdateStudent.as_view(), name='edit'),
     path('delete/<pk>/', DeleteStudent.as_view(), name='delete')
 ]
-
-handler404 = 'students.views.handle_error_404'

@@ -6,7 +6,7 @@
     {% if user.is_authenticated %}
         <p class="lead"><em>Are you sure, you want to log out?</em><br>
         You won't be able to have access to most pages and options</p>
-        <a class="btn btn-lg btn-primary" href="{% url 'logout' %}" role="button">Logout</a>
+        <a class="btn btn-lg btn-primary" href="{% url 'users:logout' %}" role="button">Logout</a>
     {% else %}
         <p class="lead">Sorry, but seems you have limited access to the website.<br>
             You need to authorize in order to continue:</p><br>
@@ -14,19 +14,13 @@
         <ul>
             <li>
                 <p class="lead"><em>Already have an LMS account?</em></p>
-                <a class="btn btn-lg btn-warning" href="{% url 'login' %}" role="button">Login</a>
+                <a class="btn btn-lg btn-warning" href="{% url 'users:login' %}" role="button">Login</a>
             </li>
             <br>
 
             <li>
                 <p class="lead"><em>Want to create a new user?</em></p>
-                <a class="btn btn-lg btn-success" href="{% url 'registration' %}" role="button">Sign up</a>
-            </li>
-            <br>
-
-            <li>
-                <p class="lead"><em>Have a GitHub account?</em></p>
-                <a class="btn btn-lg btn-secondary" href="{% url 'social:begin' 'github' %}" role="button">GitHub</a>
+                <a class="btn btn-lg btn-success" href="{% url 'users:registration' %}" role="button">Sign up</a>
             </li>
             <br>
 

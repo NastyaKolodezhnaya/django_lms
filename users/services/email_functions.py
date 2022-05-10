@@ -3,7 +3,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
-from students.services.token_generator import TokenGenerator
+from users.services.token_generator import TokenGenerator
 from django.template import RequestContext
 
 

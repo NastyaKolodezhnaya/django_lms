@@ -1,4 +1,4 @@
-from .models import UserProfile, CustomUser, Student
+from .models import Student
 from courses.models import Course
 
 from django.contrib import admin
@@ -7,7 +7,6 @@ from django.urls import reverse
 
 
 # Register your models here.
-
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
     ordering = ['last_name']
@@ -20,8 +19,6 @@ class StudentAdmin(admin.ModelAdmin):
     def course_applied(self, instance):
         if instance.course:
             course = instance.course
-            # url = (reverse("admin:courses_course_change") + "?" + urlencode({"course__id": f"{course.id}"}))
-            # return format_html('<a href="{url}">{course.name}</a>')
 
             return format_html(
                 f'<a href="http://127.0.0.1:8000/admin/courses/course/{course.pk}/change/">{course.name}</a>')
@@ -38,13 +35,3 @@ class StudentAdmin(admin.ModelAdmin):
             'fields': ('avatar', 'resume')
         })
     )
-
-
-@admin.register(UserProfile)
-class UserProfileAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(CustomUser)
-class CustomUserAdmin(admin.ModelAdmin):
-    pass

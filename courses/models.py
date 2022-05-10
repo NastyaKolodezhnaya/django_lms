@@ -1,6 +1,6 @@
 from django.db import models
 import uuid
-import datetime
+from django.utils import timezone
 
 
 # Create your models here.
@@ -9,30 +9,8 @@ class Course(models.Model):
                           default=uuid.uuid4,
                           editable=False)
     name = models.CharField(null=False, max_length=100)
-    start_date = models.DateField(null=True, default=datetime.date.today())
+    start_date = models.DateField(null=True, default=timezone.now)
     count_of_students = models.IntegerField(default=0)
-    room = models.ForeignKey(
-        "courses.Room", null=True, blank=True, related_name="courses", on_delete=models.SET_NULL
-    )
-
-    def __str__(self):
-        return f"{self.name}"
-
-
-class Room(models.Model):
-    location = models.CharField(
-        max_length=100,
-        null=True,
-        blank=True,
-    )
-    color = models.ForeignKey("courses.Color", null=True, on_delete=models.SET_NULL)
-
-    def __str__(self):
-        return f"{self.location}, {self.color}"
-
-
-class Color(models.Model):
-    name = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name}"
