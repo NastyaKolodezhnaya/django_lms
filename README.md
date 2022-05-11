@@ -15,8 +15,8 @@ and some more:
 - search
 - filter records with the course applied
 
-## Hint
-use `generate_students` command from your console to generate random data for listing
+## Quick Hint
+use `generate_students` command from your console to generate random data for listing:
 ```
 python manage.py generate_students [number_of_generated_objects]
 ```
