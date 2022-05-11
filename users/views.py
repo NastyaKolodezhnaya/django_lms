@@ -4,8 +4,6 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_decode
 
 from django.shortcuts import render
-from webargs.djangoparser import DjangoParser
-from django.core.exceptions import BadRequest
 from django.template import RequestContext
 
 from users.forms import RegistrationUserForm
@@ -21,20 +19,15 @@ from users.services.token_generator import TokenGenerator
 from django.contrib.auth import login
 
 
-parser = DjangoParser()
-
-
 # Create your views here.
-@parser.error_handler
-def handle_error(error, req, schema, *, error_status_code, error_headers):
-    raise BadRequest(error.messages)
-
-
 def handle_error_404(request, exception):
-    context = RequestContext(request)
-    response = render('404.html', context)
-    response.status_code = 404
-    return response
+    data = {}
+    return render(request, '404.html', data)
+
+
+def handle_error_500(request):
+    data = {}
+    return render(request, '404.html', data)
 
 
 class IndexPage(TemplateView):
