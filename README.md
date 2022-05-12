@@ -1,5 +1,5 @@
 # Student-Teacher management system
-so called 'lms' course project that keeps track on student/teacher data
+LMS course project that keeps track on student/teacher data
 
 created during learning at Hillel IT School
 
