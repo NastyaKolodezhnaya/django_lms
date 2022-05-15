@@ -1,15 +1,12 @@
 from django.db.models import Q
 from django.forms.utils import ErrorList
-from webargs import fields
-from django.urls import reverse, reverse_lazy
-from django.shortcuts import render
+from django.urls import reverse_lazy
 
 from students.models import Student
 from courses.models import Course
 
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import login
 
 
 class GetStudents(LoginRequiredMixin, ListView):
@@ -62,8 +59,12 @@ class CreateStudent(LoginRequiredMixin, CreateView):
         first_name = form.cleaned_data["first_name"]
         last_name = form.cleaned_data["last_name"]
         if first_name == last_name:
-            form._errors["first_name"] = ErrorList(["First and last name cannot be equal, bro!"])
-            form._errors["last_name"] = ErrorList(["First and last name cannot be equal, bro!"])
+            form._errors["first_name"] = ErrorList(
+                ["First and last name cannot be equal, bro!"]
+            )
+            form._errors["last_name"] = ErrorList(
+                ["First and last name cannot be equal, bro!"]
+            )
             return super().form_invalid(form)
         return super().form_valid(form)
 
@@ -80,8 +81,12 @@ class UpdateStudent(LoginRequiredMixin, UpdateView):
         first_name = form.cleaned_data["first_name"]
         last_name = form.cleaned_data["last_name"]
         if first_name == last_name:
-            form._errors["first_name"] = ErrorList(["First and last name cannot be equal, bro!"])
-            form._errors["last_name"] = ErrorList(["First and last name cannot be equal, bro!"])
+            form._errors["first_name"] = ErrorList(
+                ["First and last name cannot be equal, bro!"]
+            )
+            form._errors["last_name"] = ErrorList(
+                ["First and last name cannot be equal, bro!"]
+            )
             return super().form_invalid(form)
         return super().form_valid(form)
 

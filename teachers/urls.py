@@ -14,7 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from teachers.views import GetTeachers, CreateTeacher, UpdateTeacher, DeleteTeacher, SearchTeacher
+from teachers.views import (GetTeachers, CreateTeacher,
+                            UpdateTeacher, DeleteTeacher, SearchTeacher)
 
 
 app_name = 'teachers'

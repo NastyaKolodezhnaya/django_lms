@@ -1,9 +1,10 @@
 from .models import Student
-from courses.models import Course
 
 from django.contrib import admin
 from django.utils.html import format_html
-from django.urls import reverse
+
+
+URL_COURSES = 'http://127.0.0.1:8000/admin/courses/course'
 
 
 # Register your models here.
@@ -11,7 +12,8 @@ from django.urls import reverse
 class StudentAdmin(admin.ModelAdmin):
     ordering = ['last_name']
 
-    list_display = ['first_name', 'last_name', 'email', 'course_applied', 'birthdate']
+    list_display = ['first_name', 'last_name', 'email',
+                    'course_applied', 'birthdate']
     list_filter = ['course']
     search_fields = ['first_name__icontains', 'last_name__icontains',
                      'email__icontains', 'course__name__icontains']
@@ -21,7 +23,8 @@ class StudentAdmin(admin.ModelAdmin):
             course = instance.course
 
             return format_html(
-                f'<a href="http://127.0.0.1:8000/admin/courses/course/{course.pk}/change/">{course.name}</a>')
+                f'<a href="{URL_COURSES}/{course.pk}/change/">'
+                f'{course.name}</a>')
 
     fieldsets = (
         ('Initials', {

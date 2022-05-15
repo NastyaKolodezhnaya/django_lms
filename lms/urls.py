@@ -19,9 +19,6 @@ from users.views import IndexPage
 from django.conf.urls.static import static
 from django.conf import settings
 
-from users.views import LoginUser, LogoutUser, UserSignIn, RegistrationUser, ActivateUser
-
-from users.views import handle_error_404
 from django.conf.urls import handler404
 
 
@@ -36,5 +33,5 @@ urlpatterns = [
     path('teachers/', include('teachers.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = 'users.views.handle_error_404'
+handler404 = 'users.views.handle_error_404'  # noqa: F811
 handler500 = 'users.views.handle_error_500'

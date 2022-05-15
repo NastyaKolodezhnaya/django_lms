@@ -1,8 +1,6 @@
-from django.forms import ModelForm, EmailField
-from django.core.validators import ValidationError
+from django.forms import EmailField
 
-from users.models import UserProfile, CustomUser
-from django.contrib.auth.models import User
+from users.models import CustomUser
 from django.contrib.auth.forms import UserCreationForm
 
 

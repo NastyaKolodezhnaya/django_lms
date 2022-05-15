@@ -3,8 +3,6 @@ import datetime
 
 import uuid
 from django.db import models
-from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext as _
 
 from django.core.validators import MinLengthValidator, RegexValidator
 from students.validators import prohibited_domains, older_than_18
@@ -22,7 +20,7 @@ class Person(models.Model):
 
     phone_number = models.CharField(
         null=True, max_length=14, unique=True,
-        blank=True, validators=[RegexValidator("\d{10,14}")]
+        blank=True, validators=[RegexValidator(r"\d{10,14}")]
     )
 
     class Meta:
@@ -30,8 +28,11 @@ class Person(models.Model):
 
 
 class Student(Person):
-    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
-    birthdate = models.DateField(null=True, blank=True, default=datetime.date.today, validators=[older_than_18])
+    id = models.UUIDField(primary_key=True, unique=True,
+                          default=uuid.uuid4, editable=False)
+    birthdate = models.DateField(null=True, blank=True,
+                                 default=datetime.date.today,
+                                 validators=[older_than_18])
 
     avatar = models.ImageField(upload_to='avatar', null=True,
                                blank=True)
@@ -39,7 +40,8 @@ class Student(Person):
                               blank=True)
 
     course = models.ForeignKey(
-        "courses.Course", null=True, blank=True, related_name="student_course", on_delete=models.SET_NULL
+        "courses.Course", null=True, blank=True,
+        related_name="student_course", on_delete=models.SET_NULL
     )
 
     def __str__(self):

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 import datetime
 
 import uuid
@@ -13,7 +13,8 @@ from django.core.validators import RegexValidator
 # Create your models here.
 class CustomUser(AbstractBaseUser, PermissionsMixin):
 
-    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, unique=True,
+                          default=uuid.uuid4, editable=False)
     email = models.EmailField(_('email address'), null=False, unique=True)
     first_name = models.CharField(_('first name'), max_length=150, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
@@ -21,14 +22,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(
         _('active'),
         default=True,
-        help_text=_('Designates whether this user should be treated as active. '
-                    'Unselect this instead of deleting accounts.')
+        help_text=_('Designates whether this user should be treated '
+                    'as active. Unselect this instead of deleting '
+                    'accounts.')
     )
 
     is_staff = models.BooleanField(
         _('staff'),
         default=False,
-        help_text=_('Designates whether this user can log into the admin site.')
+        help_text=_('Designates whether this user can log into '
+                    'the admin site.')
     )
 
     objects = CustomManager()
@@ -45,13 +48,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 class UserProfile(models.Model):
 
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    user = models.OneToOneField(get_user_model(),
+                                on_delete=models.CASCADE)
 
     phone_number = models.CharField(
         null=True, max_length=14, unique=True,
         blank=True, validators=[RegexValidator(r'+\d{12}')]
     )
-    birthdate = models.DateField(null=True, blank=True, default=datetime.date.today)
+    birthdate = models.DateField(null=True, blank=True,
+                                 default=datetime.date.today)
 
     avatar = models.ImageField(upload_to='avatar', null=True,
                                blank=True)
@@ -59,7 +64,8 @@ class UserProfile(models.Model):
                               blank=True)
 
     course = models.ForeignKey(
-        "courses.Course", null=True, blank=True, related_name="user_course", on_delete=models.SET_NULL
+        "courses.Course", null=True, blank=True, related_name="user_course",
+        on_delete=models.SET_NULL
     )
 
     def __str__(self):

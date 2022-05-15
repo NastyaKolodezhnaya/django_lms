@@ -5,7 +5,8 @@ from students.models import Student
 
 
 class Command(BaseCommand):
-    help = 'generate objects of class <Student>, add it to "students_student" database'
+    help = 'generate objects of class <Student>, ' \
+           'add it to "students_student" database'
 
     def handle(self, *args, **kwargs):
         count = int(args[0])
@@ -16,10 +17,10 @@ class Command(BaseCommand):
                 first_name=faker.first_name(),
                 last_name=faker.last_name(),
                 email=faker.email(),
-                phone_number=(
-                        '+380' + ''.join(str(dig) for dig in random.sample(range(10), 9))
-                ),
-                birthdate=faker.date_time_between(start_date='-30y', end_date='-18y'))
+                phone_number=('+380' + ''.join(str(dig)
+                              for dig in random.sample(range(10), 9))),
+                birthdate=faker.date_time_between(start_date='-30y',
+                                                  end_date='-18y'))
             instance.save()
 
     def add_arguments(self, parser):

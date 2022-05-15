@@ -1,10 +1,9 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
+from django.http import HttpResponse
+from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_decode
 
 from django.shortcuts import render
-from django.template import RequestContext
 
 from users.forms import RegistrationUserForm
 from users.services.email_functions import send_registration_email
@@ -14,7 +13,6 @@ from django.contrib.auth import get_user_model
 from django.views.generic import TemplateView, CreateView, RedirectView
 from django.contrib.auth.views import LoginView, LogoutView
 
-from django.core.mail import EmailMessage
 from users.services.token_generator import TokenGenerator
 from django.contrib.auth import login
 
@@ -70,7 +68,6 @@ class ActivateUser(RedirectView):
             user_pk = force_bytes(urlsafe_base64_decode(uidb64))
             current_user = get_user_model().objects.get(pk=user_pk)
         except (User.DoesNotExist, ValueError, TypeError):
-            # create an html template saying 'Seems, you entered an invalid data! There is no such page!'
             return HttpResponse("Invalid data")
 
         if current_user.is_active:
@@ -80,7 +77,8 @@ class ActivateUser(RedirectView):
             current_user.is_active = True
             current_user.save()
 
-            login(request, current_user, backend='django.contrib.auth.backends.ModelBackend')
+            login(request, current_user,
+                  backend='django.contrib.auth.backends.ModelBackend')
             return super().get(request, *args, **kwargs)
 
         return HttpResponse("Invalid data")

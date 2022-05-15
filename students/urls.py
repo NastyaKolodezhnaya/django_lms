@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.urls import path
 
-from students.views import (GetStudents, CreateStudent, UpdateStudent, DeleteStudent, SearchStudent)
+from students.views import (GetStudents, CreateStudent,
+                            UpdateStudent, DeleteStudent, SearchStudent)
 
 
 app_name = 'students'

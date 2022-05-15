@@ -4,7 +4,6 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from users.services.token_generator import TokenGenerator
-from django.template import RequestContext
 
 
 def send_registration_email(request, user_instance):
@@ -13,8 +12,10 @@ def send_registration_email(request, user_instance):
     mail_body = render_to_string('emails/registration_email.html',
                                  {'user': user_instance,
                                   'domain': get_current_site(request).domain,
-                                  'uid': urlsafe_base64_encode(force_bytes(user_instance.pk)),
-                                  'token': TokenGenerator().make_token(user_instance)})
+                                  'uid': urlsafe_base64_encode(
+                                      force_bytes(user_instance.pk)),
+                                  'token': TokenGenerator().make_token(
+                                      user_instance)})
 
     email = EmailMessage(subject=mail_subject, body=mail_body,
                          to=[user_instance.email])

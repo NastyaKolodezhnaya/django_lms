@@ -1,7 +1,7 @@
 from django.db import models
 import uuid
 from faker import Faker
-from django.core.validators import MinLengthValidator, RegexValidator
+import datetime
 
 from students.models import Person
 
@@ -9,7 +9,8 @@ from students.models import Person
 # Create your models here.
 class Teacher(Person):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    course = models.ManyToManyField(to="courses.Course", related_name="teacher_course")
+    course = models.ManyToManyField(to="courses.Course",
+                                    related_name="teacher_course")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}, ({self.id})"
