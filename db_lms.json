@@ -1,0 +1,932 @@
+[
+{
+  "model": "students.student",
+  "pk": "0a326f61-31dc-4dbb-801a-b99f4f71864b",
+  "fields": {
+    "first_name": "Gregory",
+    "last_name": "Young",
+    "email": "davisshannon@example.org",
+    "phone_number": "+3800628112209",
+    "birthdate": "1991-11-16",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "181b4f48-880b-4e4e-90f3-3e2104fd05f4",
+  "fields": {
+    "first_name": "Cynthia",
+    "last_name": "Lawrence",
+    "email": "greenmarcus@example.com",
+    "phone_number": "+3809149984138",
+    "birthdate": "1998-05-10",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "1cff1c06-a5f1-47e4-99e2-9d67696e04e7",
+  "fields": {
+    "first_name": "Angela",
+    "last_name": "Navarro",
+    "email": "cobbrenee@example.net",
+    "phone_number": "+3800990282506",
+    "birthdate": "1998-07-22",
+    "avatar": "",
+    "resume": "",
+    "course": "5334df8f-ce05-42d3-a84a-5d6b8da90dd8"
+  }
+},
+{
+  "model": "students.student",
+  "pk": "1e4ba138-09a1-46df-9570-95b224ec79cd",
+  "fields": {
+    "first_name": "Samantha",
+    "last_name": "Payne",
+    "email": "cochrandana@example.net",
+    "phone_number": "+3800079912198",
+    "birthdate": "1995-10-27",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "208a2d40-c0f8-4646-9567-e8095744e381",
+  "fields": {
+    "first_name": "Jenna",
+    "last_name": "Williams",
+    "email": "lramos@example.net",
+    "phone_number": "+3803942096492",
+    "birthdate": "1995-02-24",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "25f26367-fae1-461b-901e-090899c9bbfc",
+  "fields": {
+    "first_name": "Kathleen",
+    "last_name": "Foster",
+    "email": "jennifer64@example.net",
+    "phone_number": "+380671540829",
+    "birthdate": "1998-09-23",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "2a84bce6-4a51-44b0-898f-c64ebe5162f0",
+  "fields": {
+    "first_name": "Curtis",
+    "last_name": "Williams",
+    "email": "jessicabates@example.net",
+    "phone_number": "+3806034348074",
+    "birthdate": "1994-04-16",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "2c2c202d-5724-42c2-8b01-dd9d8f6381f8",
+  "fields": {
+    "first_name": "Christine",
+    "last_name": "Powell",
+    "email": "clarkwendy@example.org",
+    "phone_number": "+3805840454181",
+    "birthdate": "1995-10-04",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "366ea063-bacb-480b-b12f-27eb264e4443",
+  "fields": {
+    "first_name": "Tammy",
+    "last_name": "Clayton",
+    "email": "gilesdaniel@example.org",
+    "phone_number": "+3806903688449",
+    "birthdate": "1995-05-17",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "3bc3fe7d-bc72-4415-857b-25748f2dd026",
+  "fields": {
+    "first_name": "Julia",
+    "last_name": "Martinez",
+    "email": "jenniferphillips@example.com",
+    "phone_number": "+3808008621573",
+    "birthdate": "1994-06-19",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "3e9e84d1-a7d1-47ab-93db-0861fd6f2b30",
+  "fields": {
+    "first_name": "James",
+    "last_name": "Smith",
+    "email": "dawncurry@example.com",
+    "phone_number": "+3809932156004",
+    "birthdate": "1995-06-19",
+    "avatar": "avatar/4D8F38C6-B663-44B2-93D6-640EECE506BA_1_102_o.jpeg",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "43875ae0-8da7-4328-b8e1-732fb9ae828c",
+  "fields": {
+    "first_name": "Annette",
+    "last_name": "Lee",
+    "email": "matthewcharles@example.com",
+    "phone_number": "+3807428566320",
+    "birthdate": "2000-04-02",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "4be651c9-e151-46ad-85b5-51ce4ba375ea",
+  "fields": {
+    "first_name": "Nathan",
+    "last_name": "Rodriguez",
+    "email": "jessica39@example.net",
+    "phone_number": "+3803240532795",
+    "birthdate": "2000-06-11",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "50e68ac6-63c9-42f4-873d-19377b63cdb2",
+  "fields": {
+    "first_name": "Michael",
+    "last_name": "Martinez",
+    "email": "gentrytimothy@example.org",
+    "phone_number": "+3808009661456",
+    "birthdate": "1999-06-29",
+    "avatar": "",
+    "resume": "",
+    "course": "32d5abdb-2cf5-44ce-81a9-8a99b4a4c02c"
+  }
+},
+{
+  "model": "students.student",
+  "pk": "51426353-e427-4139-899c-047856d310b6",
+  "fields": {
+    "first_name": "Christopher",
+    "last_name": "Cox",
+    "email": "parrishlisa@example.org",
+    "phone_number": "+3804421478368",
+    "birthdate": "1993-10-25",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "529b939e-35c6-4ed1-841b-632739c4c202",
+  "fields": {
+    "first_name": "Sherry",
+    "last_name": "Miller",
+    "email": "mallen@example.com",
+    "phone_number": null,
+    "birthdate": "1995-07-03",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "5767c5dd-b69d-4997-a52e-e7b966e458f8",
+  "fields": {
+    "first_name": "Thomas",
+    "last_name": "Vance",
+    "email": "jamesbaker@example.org",
+    "phone_number": "+3808757556209",
+    "birthdate": "2002-05-24",
+    "avatar": "",
+    "resume": "",
+    "course": "8e24c606-0e03-4740-a757-c2ac835a9794"
+  }
+},
+{
+  "model": "students.student",
+  "pk": "5c9f6dcb-c4ed-4701-bb76-4239c8ef6886",
+  "fields": {
+    "first_name": "Sandra",
+    "last_name": "Thompson",
+    "email": "christopherjohnson@example.org",
+    "phone_number": "+3809665209984",
+    "birthdate": "1996-08-13",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "616e366a-ada3-44d8-859f-782c95430e77",
+  "fields": {
+    "first_name": "Alexandra",
+    "last_name": "Nguyen",
+    "email": "ncollins@example.org",
+    "phone_number": "+3801289031768",
+    "birthdate": "1992-06-01",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "65a65016-26c8-4ee2-b213-8ff894e5f0a6",
+  "fields": {
+    "first_name": "Carolyn",
+    "last_name": "Frazier",
+    "email": "jeremygarcia@example.net",
+    "phone_number": "+3809118342533",
+    "birthdate": "2003-10-03",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "666cc9ad-95c0-4876-b9b6-6ecc27237fc8",
+  "fields": {
+    "first_name": "Shawn",
+    "last_name": "Harris",
+    "email": "perezjeffery@example.net",
+    "phone_number": "+3809689810507",
+    "birthdate": "1993-02-08",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "6f5259c9-e656-4623-89c0-d00e2d02d345",
+  "fields": {
+    "first_name": "Tammy",
+    "last_name": "Woods",
+    "email": "stantonalex@example.org",
+    "phone_number": "+3808531073181",
+    "birthdate": "1994-10-31",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "6f9d97f4-91a3-49ba-b6d0-14e5dbe71c14",
+  "fields": {
+    "first_name": "Tina",
+    "last_name": "Calhoun",
+    "email": "tyler50@example.org",
+    "phone_number": null,
+    "birthdate": "1992-08-04",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "77ff6cb4-6440-4175-8b4a-72e22a934df3",
+  "fields": {
+    "first_name": "Kristen",
+    "last_name": "Lopez",
+    "email": "jamessmith@example.com",
+    "phone_number": "+3809472568670",
+    "birthdate": "1996-07-08",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "7aad2d6f-b644-476c-8148-84455782a867",
+  "fields": {
+    "first_name": "Anna",
+    "last_name": "Richardson",
+    "email": "matthewsjessica@example.net",
+    "phone_number": "+3808858411396",
+    "birthdate": "2000-03-17",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "8373945c-c7e8-431f-ba76-01596c476f14",
+  "fields": {
+    "first_name": "Barbara",
+    "last_name": "Pena",
+    "email": "mendezjohn@example.org",
+    "phone_number": "+380309764215",
+    "birthdate": "1997-11-24",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "8644225e-f275-4d24-ab91-ce9af38209f1",
+  "fields": {
+    "first_name": "John",
+    "last_name": "Andrade",
+    "email": "ccollins@example.net",
+    "phone_number": "+3808151506398",
+    "birthdate": "2000-07-11",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "86d6e52e-bb55-42e7-82fd-3ecb06d3ff87",
+  "fields": {
+    "first_name": "Laura",
+    "last_name": "Stanley",
+    "email": "huntergonzalez@example.org",
+    "phone_number": "+3800861721866",
+    "birthdate": "1994-07-28",
+    "avatar": "",
+    "resume": "",
+    "course": "32d5abdb-2cf5-44ce-81a9-8a99b4a4c02c"
+  }
+},
+{
+  "model": "students.student",
+  "pk": "890a56c6-882b-4fcc-9c0c-ba82a406cd21",
+  "fields": {
+    "first_name": "Amanda",
+    "last_name": "Weaver",
+    "email": "njohnson@example.net",
+    "phone_number": "+3804009860041",
+    "birthdate": "2000-05-22",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "93a8b0e2-f567-4c36-b023-d9b335ea3ad5",
+  "fields": {
+    "first_name": "Toni",
+    "last_name": "Williams",
+    "email": "gregory66@example.net",
+    "phone_number": "+3802910491915",
+    "birthdate": "1999-10-11",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "9e688de4-45a6-468a-a21c-d08c1b8bffa6",
+  "fields": {
+    "first_name": "Angela",
+    "last_name": "Walters",
+    "email": "hortiz@example.com",
+    "phone_number": "+3809823830229",
+    "birthdate": "1997-10-04",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "aa21dee5-bd27-4ffd-a794-a77880bdd718",
+  "fields": {
+    "first_name": "Andrew",
+    "last_name": "Decker",
+    "email": "brianhoover@example.com",
+    "phone_number": "+3803164423748",
+    "birthdate": "1994-07-07",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "aec5ef99-94e2-4ad5-8ffa-aa50c6d4e533",
+  "fields": {
+    "first_name": "Ashley",
+    "last_name": "Jones",
+    "email": "johnsanchez@example.org",
+    "phone_number": "+3806374871087",
+    "birthdate": "2003-06-14",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "af290343-f6cd-4596-8241-2f42c26fc5cc",
+  "fields": {
+    "first_name": "Rachel",
+    "last_name": "Conway",
+    "email": "roger33@example.org",
+    "phone_number": "+3803682078657",
+    "birthdate": "1992-05-23",
+    "avatar": "avatar/A873C994-0FC8-4D36-9E15-224159032444_1_201_a.jpeg",
+    "resume": "",
+    "course": "8e24c606-0e03-4740-a757-c2ac835a9794"
+  }
+},
+{
+  "model": "students.student",
+  "pk": "bfdaa09d-5e6d-47c0-8957-37fba53bf24d",
+  "fields": {
+    "first_name": "Heather",
+    "last_name": "Gonzalez",
+    "email": "grantmedina@example.com",
+    "phone_number": "+3806834576979",
+    "birthdate": "1998-04-14",
+    "avatar": "D084AEA3-079D-4BF8-93C2-3145D9D17C63.jpeg",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "c703c448-c28f-4310-95ac-ed64ff0f97c7",
+  "fields": {
+    "first_name": "Bianca",
+    "last_name": "Williams",
+    "email": "connerbrandon@example.com",
+    "phone_number": "+3809467625149",
+    "birthdate": "1997-09-07",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "cc2c1644-a71a-410f-84d0-a79695e5b984",
+  "fields": {
+    "first_name": "Christine",
+    "last_name": "Diaz",
+    "email": "johnsonsarah@example.org",
+    "phone_number": "+3808875280003",
+    "birthdate": "1992-06-03",
+    "avatar": "",
+    "resume": "",
+    "course": "8e24c606-0e03-4740-a757-c2ac835a9794"
+  }
+},
+{
+  "model": "students.student",
+  "pk": "d001d634-1bdd-4ffb-96c8-817810a3c651",
+  "fields": {
+    "first_name": "James",
+    "last_name": "Casey",
+    "email": "rhonda84@example.com",
+    "phone_number": "+3809204841346",
+    "birthdate": "1991-11-24",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "d044b166-95e4-4706-9013-bc6573416101",
+  "fields": {
+    "first_name": "Julie",
+    "last_name": "Daniels",
+    "email": "kgarcia@example.org",
+    "phone_number": "+3806662255437",
+    "birthdate": "1993-06-25",
+    "avatar": "",
+    "resume": "",
+    "course": "46389291-70e9-40b1-97fb-87cb379ef8e3"
+  }
+},
+{
+  "model": "students.student",
+  "pk": "dff40e1e-cbfa-47d3-945f-84addfd6404e",
+  "fields": {
+    "first_name": "Eric",
+    "last_name": "Pope",
+    "email": "bryansanchez@example.com",
+    "phone_number": "+3805804317839",
+    "birthdate": "1998-09-06",
+    "avatar": "",
+    "resume": "",
+    "course": "5334df8f-ce05-42d3-a84a-5d6b8da90dd8"
+  }
+},
+{
+  "model": "students.student",
+  "pk": "e40f67c1-37f3-406e-a9a5-eb0271d6cb8b",
+  "fields": {
+    "first_name": "Jessica",
+    "last_name": "Mason",
+    "email": "rebecca82@example.net",
+    "phone_number": "+3800951655875",
+    "birthdate": "1999-10-16",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "e5e4f2e1-10f1-410d-ad2a-eeb60654e56a",
+  "fields": {
+    "first_name": "Stephanie",
+    "last_name": "Clark",
+    "email": "porterjeremy@example.com",
+    "phone_number": "+3809602973970",
+    "birthdate": "2003-09-23",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "e8329894-453a-43e9-ba94-c042bf6a9f16",
+  "fields": {
+    "first_name": "Sean",
+    "last_name": "Quinn",
+    "email": "alicia91@example.org",
+    "phone_number": "+3805541384370",
+    "birthdate": "1998-08-25",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "ed385265-97f7-42dd-a8d6-7daac5ada479",
+  "fields": {
+    "first_name": "Joseph",
+    "last_name": "Lopez",
+    "email": "kelly91@example.org",
+    "phone_number": "+3807790640436",
+    "birthdate": "1999-10-09",
+    "avatar": "avatar/CB270D3D-A674-49A8-B448-F450D5E588E9_1_201_a.jpeg",
+    "resume": "",
+    "course": "46389291-70e9-40b1-97fb-87cb379ef8e3"
+  }
+},
+{
+  "model": "students.student",
+  "pk": "f2dba607-76e0-4f64-b6d5-a8c6f269e892",
+  "fields": {
+    "first_name": "Stephen",
+    "last_name": "Smith",
+    "email": "donald05@example.org",
+    "phone_number": "+3806468737511",
+    "birthdate": "1994-09-20",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "f710728f-e5a3-41de-88da-f1e41e0a73d2",
+  "fields": {
+    "first_name": "Stephanie",
+    "last_name": "Dominguez",
+    "email": "gduffy@example.net",
+    "phone_number": "+3800509688271",
+    "birthdate": "1997-06-30",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "f8b6b133-ea6b-4f19-acb0-3eed0f849d7b",
+  "fields": {
+    "first_name": "John",
+    "last_name": "Watts",
+    "email": "richard03@example.com",
+    "phone_number": "+3807609954630",
+    "birthdate": "1998-12-10",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "students.student",
+  "pk": "faf501a5-4596-4064-af3d-843d13b51776",
+  "fields": {
+    "first_name": "Victoria",
+    "last_name": "Becker",
+    "email": "robert11@example.org",
+    "phone_number": "+3804945319210",
+    "birthdate": "2003-08-20",
+    "avatar": "",
+    "resume": "",
+    "course": null
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "009ee876-2ace-400d-b706-0342f9c332fb",
+  "fields": {
+    "first_name": "Brandon",
+    "last_name": "Wells",
+    "email": "gutierrezkimberly@example.net",
+    "phone_number": "+3803751505079",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "23904280-4f55-4927-8baf-b0809cea3e7f",
+  "fields": {
+    "first_name": "Paige",
+    "last_name": "Wright",
+    "email": "reillyjodi@example.org",
+    "phone_number": "+3806878105369",
+    "course": [
+      "5334df8f-ce05-42d3-a84a-5d6b8da90dd8"
+    ]
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "263fcb21-8078-41cb-bd2c-a7f6e5e39926",
+  "fields": {
+    "first_name": "Shane",
+    "last_name": "Hamilton",
+    "email": "gloveraustin@example.org",
+    "phone_number": "+3800334744686",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "378ac4bf-209a-4d65-a8de-652031db49e6",
+  "fields": {
+    "first_name": "Laura",
+    "last_name": "Hill",
+    "email": "lallen@example.org",
+    "phone_number": "+3805125583986",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "3c57b920-99c9-477e-9ced-93c01262fcc5",
+  "fields": {
+    "first_name": "Tony",
+    "last_name": "Roberts",
+    "email": "mjensen@example.org",
+    "phone_number": "+3809037184016",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "5593e01c-387b-42b5-8e32-450c63443e90",
+  "fields": {
+    "first_name": "Elizabeth",
+    "last_name": "Wallace",
+    "email": "lgriffin@example.com",
+    "phone_number": "+3806186342441",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "5d9092b0-8f0e-41eb-9e15-49efbb3ad5fe",
+  "fields": {
+    "first_name": "Rickey",
+    "last_name": "Norman",
+    "email": "brooke71@example.org",
+    "phone_number": "+3805414615959",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "5db6cd05-4cdc-4cd5-b673-cdb90b308d19",
+  "fields": {
+    "first_name": "Sandra",
+    "last_name": "Ferrell",
+    "email": "underwoodjacob@example.org",
+    "phone_number": "+3800687384328",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "67d1e763-c926-47ce-91a0-31b21717d077",
+  "fields": {
+    "first_name": "Margaret",
+    "last_name": "Rodriguez",
+    "email": "travis11@example.net",
+    "phone_number": "+3806737300775",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "75da3b32-7eab-4e1b-96ab-3853fe3635ae",
+  "fields": {
+    "first_name": "Lynn",
+    "last_name": "Ford",
+    "email": "pvega@example.net",
+    "phone_number": "+3800295556409",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "9bfc06d8-afa8-4388-b235-ce5491788a83",
+  "fields": {
+    "first_name": "Kevin",
+    "last_name": "Snyder",
+    "email": "alikatherine@example.com",
+    "phone_number": "+3801989359637",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "9ec540dc-972f-4c67-b3c8-e51545fb5328",
+  "fields": {
+    "first_name": "Kyle",
+    "last_name": "Marshall",
+    "email": "elizabethmassey@example.com",
+    "phone_number": "+3805163649100",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "a2956fb4-0c12-4a3e-9230-aab381943fcf",
+  "fields": {
+    "first_name": "Amber",
+    "last_name": "Juarez",
+    "email": "garciastephanie@example.com",
+    "phone_number": "+3807084072520",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "a4479d5f-31b5-44a4-9c1d-a7d9b2d14d3f",
+  "fields": {
+    "first_name": "Chris",
+    "last_name": "Randall",
+    "email": "nmolina@example.org",
+    "phone_number": "+3807042422198",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "ba8f4f25-7f37-4dcb-9acc-b76d43c9edc5",
+  "fields": {
+    "first_name": "Jeffrey",
+    "last_name": "Hernandez",
+    "email": "brian99@example.net",
+    "phone_number": "+3809481322513",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "be074197-8df6-4c06-937d-29ff58c5e60d",
+  "fields": {
+    "first_name": "Angela",
+    "last_name": "Scott",
+    "email": "jcox@example.net",
+    "phone_number": "+3805991316646",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "e0c13805-336d-4286-b486-c9848c2c11b6",
+  "fields": {
+    "first_name": "Derrick",
+    "last_name": "Mckee",
+    "email": "tannersmith@example.net",
+    "phone_number": "+3807712281677",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "fc75a970-14d4-4e69-8f95-914d439dd71c",
+  "fields": {
+    "first_name": "Taylor",
+    "last_name": "Robinson",
+    "email": "stephanie52@example.org",
+    "phone_number": "+3803060086248",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "fcbe8377-b564-4357-ae1e-97a3363bdb3b",
+  "fields": {
+    "first_name": "John",
+    "last_name": "Hall",
+    "email": "ustephenson@example.com",
+    "phone_number": "+3801074709919",
+    "course": []
+  }
+},
+{
+  "model": "teachers.teacher",
+  "pk": "fdc2a857-dcb3-4807-86c0-1d9c84516133",
+  "fields": {
+    "first_name": "William",
+    "last_name": "Cummings",
+    "email": "sarahcraig@example.com",
+    "phone_number": "+3807949894071",
+    "course": []
+  }
+},
+{
+  "model": "courses.course",
+  "pk": "32d5abdb-2cf5-44ce-81a9-8a99b4a4c02c",
+  "fields": {
+    "name": "Java Essentials",
+    "start_date": "2011-11-13",
+    "count_of_students": 20
+  }
+},
+{
+  "model": "courses.course",
+  "pk": "46389291-70e9-40b1-97fb-87cb379ef8e3",
+  "fields": {
+    "name": "Python_06/09",
+    "start_date": "2019-11-13",
+    "count_of_students": 14
+  }
+},
+{
+  "model": "courses.course",
+  "pk": "5334df8f-ce05-42d3-a84a-5d6b8da90dd8",
+  "fields": {
+    "name": "DevOps basic",
+    "start_date": "2018-11-13",
+    "count_of_students": 16
+  }
+},
+{
+  "model": "courses.course",
+  "pk": "8e24c606-0e03-4740-a757-c2ac835a9794",
+  "fields": {
+    "name": "UI/UX Design",
+    "start_date": "2020-11-13",
+    "count_of_students": 12
+  }
+}
+]

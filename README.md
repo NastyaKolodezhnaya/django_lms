@@ -14,9 +14,8 @@ LMS course project that keeps track on student/teacher data
 ```
 git clone git@github.com:NastyaKolodezhnaya/smashing-wallpaper-downloader.git
 docker build -t lms .
-docker run -it lms
+docker run -it --rm -p <port>:<port> lms
 ```
-
 
 ## Quick Hint
 use `generate_students` command from your console to generate random data for listing:
